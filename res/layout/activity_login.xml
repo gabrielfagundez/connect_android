@@ -44,22 +44,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="1"
+        android:background="@color/blanco"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:textColorHint="@color/grisclarotexto"
-        android:background="@color/blanco"
-        android:paddingLeft="10dp" />
+        android:paddingLeft="10dp"
+        android:textColorHint="@color/grisclarotexto" />
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="260dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_weight="0.54"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.15"
         android:background="@drawable/login_selector"
         android:text="@string/login"
         android:textColor="@color/gristexto" />
