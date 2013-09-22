@@ -1,11 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
-        Base application theme for API 11+. This theme completely replaces
-        AppBaseTheme from res/values/styles.xml on API 11+ devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Holo.Light">
-        <!-- API 11 theme customizations can go here. -->
+    <style name="ThemeSelector" parent="android:Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/ActionBar</item>
+    </style>
+
+    <style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">     
+        <item name="android:background">@color/celeste</item>
+        <item name="android:textColor">@color/blanco</item>
+        		 <item name="android:actionMenuTextColor">@color/blanco</item>
+        
+        
     </style>
 
 </resources>

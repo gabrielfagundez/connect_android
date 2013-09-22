@@ -54,7 +54,7 @@
         android:textColorHint="@color/grisclarotexto" />
 
     <EditText
-        android:id="@+id/EditText01"
+        android:id="@+id/editText_password2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -76,6 +76,7 @@
         android:layout_weight="0.15"
         android:background="@drawable/login_selector"
         android:text="@string/registerbutton"
-        android:textColor="@color/gristexto" />
+        android:textColor="@color/gristexto"
+        android:onClick="register" />
 
 </LinearLayout>

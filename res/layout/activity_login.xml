@@ -62,7 +62,8 @@
         android:layout_weight="0.15"
         android:background="@drawable/login_selector"
         android:text="@string/login"
-        android:textColor="@color/gristexto" />
+        android:textColor="@color/gristexto" 
+        android:onClick="login"/>
 
     <Button
         android:id="@+id/button_register"
@@ -71,7 +72,8 @@
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="50dp"
-        android:text="@string/register"
-        android:textColor="@color/blanco" />
+        android:text="@string/create_new_account"
+        android:textColor="@color/blanco"
+        android:onClick="register" />
 
 </LinearLayout>
