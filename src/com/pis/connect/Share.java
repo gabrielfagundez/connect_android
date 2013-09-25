@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class Share extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
+		String name= intent.getStringExtra("name");
+		String id= intent.getStringExtra("id");
+    	Toast.makeText(getApplicationContext(),name.concat(id) , Toast.LENGTH_LONG).show();
 		setContentView(R.layout.activity_share);
 	}
 

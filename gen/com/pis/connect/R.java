@@ -324,6 +324,7 @@ containing a value of this type.
         public static final int confirmation=0x7f070020;
         public static final int create_new_account=0x7f07001d;
         public static final int hello_world=0x7f07001b;
+        public static final int invalid_user_pass=0x7f070025;
         public static final int login=0x7f07001c;
         public static final int logout=0x7f070022;
         public static final int mail=0x7f07001e;

@@ -8,7 +8,7 @@
     <style name="ActionBar" parent="android:style/Widget.Holo.ActionBar">     
         <item name="android:background">@color/celeste</item>
         <item name="android:textColor">@color/blanco</item>
-        		 <item name="android:actionMenuTextColor">@color/blanco</item>
+
         
         
     </style>
