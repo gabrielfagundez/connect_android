@@ -13,6 +13,11 @@
     <string name="logout">Log out</string>
     <string name="settings">Settings</string>
     <string name="codigo_qr">Codigo QR</string>
-    <string name="invalid_user_pass">Invalid user/pass. Try again :)</string>
+    <string name="user_not_found">User not found. Create a new account first :)</string>
+    <string name="invalid_password">Invalid password. Try again :)</string>
+    <string name="connection_error">Can\'t connect to server. Try again :)</string>
+	<string name="blank_fields">Fill all the blanks first :)</string>
+    
+
 
 </resources>

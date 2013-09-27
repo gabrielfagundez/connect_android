@@ -17,8 +17,7 @@
         android:theme="@style/ThemeSelector" >
         <activity
             android:name="com.pis.connect.Login"
-            android:label="@string/app_name"
-            android:finishOnTaskLaunch="true">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

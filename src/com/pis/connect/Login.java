@@ -22,13 +22,12 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -40,11 +39,8 @@ public class Login extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_login);
-		EditText mail = (EditText) findViewById(R.id.editText_mail);
-		EditText password = (EditText) findViewById(R.id.editText_password);
-		mail.setText("");
-		password.setText("");
 	}
 
 	@Override
@@ -57,11 +53,6 @@ public class Login extends Activity {
 		return true;
 	}
 	
-	@Override
-	public void onBackPressed(){
-		this.finish();
-		return;
-	}
 	
 	public void login(View view) {
 		//Obtengo usuario y pass
@@ -71,11 +62,12 @@ public class Login extends Activity {
 	    String password_str = password.getText().toString();
 	    //Si algún campo está vacio, evito la llamada al server
 	    if ((mail_str.compareTo("")==0) || (password_str.compareTo("")==0)){
-	    	Toast.makeText(getApplicationContext(), R.string.invalid_user_pass , Toast.LENGTH_LONG).show();
+	    	Toast.makeText(getApplicationContext(), R.string.blank_fields , Toast.LENGTH_LONG).show();
 	    }
 	    else{
 	    	//Hago la llamada al server
 	    	String [] parametros = {mail_str,password_str};
+	    	setProgressBarIndeterminateVisibility(true);
 	    	new consumidorPost().execute(parametros);
 	    }
 		
@@ -142,12 +134,10 @@ public class Login extends Activity {
 		    if (resEntityGet != null) {  
 		        // do something with the response
 		        String response = EntityUtils.toString(resEntityGet);
-		        Log.i("GET RESPONSE", response);
 		        return response;
 		    }
 		} catch (Exception e) {
 		    e.printStackTrace();
-		    Log.i("GET RESPONSE", e.toString());
 		}
 		return "";
 	}
@@ -173,6 +163,7 @@ public class Login extends Activity {
 		@Override
 		protected void onPostExecute(Long result){
             super.onPostExecute(result);
+            setProgressBarIndeterminateVisibility(false);
 			if (result==200){
 				Intent intent_name = new Intent();
 				intent_name.setClass(getApplicationContext(),Share.class);
@@ -180,11 +171,37 @@ public class Login extends Activity {
 				intent_name.putExtra("id", user_id);
 				startActivity(intent_name);
 			}
-			else {
-				Intent intent_name = new Intent();
-				intent_name.setClass(getApplicationContext(),Login.class);
-				//intent_name.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				startActivity(intent_name);
+			else if (result==404) {
+				//USUARIO NO ENCONTRADO
+				//Borro los campos y pongo el foco en el primero
+				EditText mail = (EditText) findViewById(R.id.editText_mail);
+				EditText password = (EditText) findViewById(R.id.editText_password);
+				mail.setText("");
+				password.setText("");
+				mail.requestFocus();
+		    	Toast.makeText(getApplicationContext(), R.string.user_not_found , Toast.LENGTH_LONG).show();
+			}
+			else if (result==401){
+				//PASSWORD INCORRECTO
+				//Borro los campos y pongo el foco en el primero
+				EditText mail = (EditText) findViewById(R.id.editText_mail);
+				EditText password = (EditText) findViewById(R.id.editText_password);
+				mail.setText("");
+				password.setText("");
+				mail.requestFocus();
+		    	Toast.makeText(getApplicationContext(), R.string.invalid_password, Toast.LENGTH_LONG).show();
+			}
+			else{
+				//OTRO TIPO DE ERROR
+				//PASSWORD INCORRECTO
+				//Borro los campos y pongo el foco en el primero
+				EditText mail = (EditText) findViewById(R.id.editText_mail);
+				EditText password = (EditText) findViewById(R.id.editText_password);
+				mail.setText("");
+				password.setText("");
+				mail.requestFocus();
+		    	Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_LONG).show();
+				
 			}
 		}
 
