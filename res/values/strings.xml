@@ -8,6 +8,7 @@
     <string name="create_new_account">Create a new account</string>
     <string name="mail">Mail</string>
     <string name="password">Password</string>
+    <string name="nombre_full">Full name</string>
     <string name="confirmation">Confirmation</string>
     <string name="registerbutton">REGISTER</string>
     <string name="logout">Log out</string>
@@ -20,5 +21,7 @@
     <string name="conectar_facebook">Conectar con Facebook</string>
 	<string name="conectar_linkedin">Conectar con LinkedIn</string>
 	<string name="cambiar_por_username">Cambiar este texto por el nombre de usuario despues de conectarse</string>
-
+	<string name="passwords_no_coinciden">Passwords don\'t match. Try again :)</string>
+	<string name="user_exists">Mail already registered. Try again! </string>
+	
 </resources>

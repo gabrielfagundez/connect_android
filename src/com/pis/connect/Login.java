@@ -124,36 +124,7 @@ public class Login extends Activity {
 	    }
 	} 
 	
-	public String getData(String user){
-		try {
-		    HttpClient client = new DefaultHttpClient();  
-		    String getURL = "http://connectwp.azurewebsites.net/api/Users/".concat(user.toString()) ;
-		    HttpGet get = new HttpGet(getURL);
-		    HttpResponse responseGet = client.execute(get);  
-		    HttpEntity resEntityGet = responseGet.getEntity();  
-		    if (resEntityGet != null) {  
-		        // do something with the response
-		        String response = EntityUtils.toString(resEntityGet);
-		        return response;
-		    }
-		} catch (Exception e) {
-		    e.printStackTrace();
-		}
-		return "";
-	}
-	
-	
-	
-    private class consumidorGet extends AsyncTask<String, Void, String>{
-   	 
-		@Override
-		protected String doInBackground(String... arg0) {
-			// TODO Auto-generated method stub
-			return getData(arg0[0]);
-		}
 
-    }
-    
     private class consumidorPost extends AsyncTask<String[], Void, Long>{
 		protected Long doInBackground(String[]... arg0) {
 			// TODO Auto-generated method stub
