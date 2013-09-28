@@ -1,7 +1,9 @@
 package com.pis.connect;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,12 @@ public class Share extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (Login.fa !=null)
+			Login.fa.finish();
+		if (Registro.fa!=null)
+			Registro.fa.finish();
+		if (RegistroDos.fa!=null)
+			RegistroDos.fa.finish();
 		Intent intent = getIntent();
 		String name= intent.getStringExtra("name");
 		String id= intent.getStringExtra("id");
@@ -25,6 +33,7 @@ public class Share extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
 
 	//Manejo de los botones de la Action Bar
 	@Override
@@ -32,9 +41,15 @@ public class Share extends Activity {
 	    switch (item.getItemId()) {
 	    	//Al apretar el boton de logout
 	        case R.id.action_logout:
+	        	//Actualizo las preferencias
+	        	SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+				pref.edit().putBoolean("log_in", false).commit();
+				pref.edit().putString("user_name", "").commit();
+				pref.edit().putString("user_id", "").commit();
 	            // go to previous screen when app icon in action bar is clicked
 	            Intent intent = new Intent(this, Login.class);
 	            startActivity(intent);
+	            finish();
 	            return true;
 	         //Al apretar el boton de settings
 	    }

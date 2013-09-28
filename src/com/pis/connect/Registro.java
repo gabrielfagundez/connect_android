@@ -29,12 +29,14 @@ import android.widget.Toast;
 
 public class Registro extends Activity {
 
+public static Activity fa;
 String user_name;
 String user_mail;
 String user_pass;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		fa=this;
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_registro);
 	}

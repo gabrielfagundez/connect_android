@@ -91,7 +91,7 @@
         android:layout_marginTop="20dp"
         android:layout_weight="0.15"
         android:background="@drawable/login_selector"
-        android:text="@string/registerbutton"
+        android:text="@string/nextbutton"
         android:textColor="@color/gristexto"
         android:onClick="register" />
 

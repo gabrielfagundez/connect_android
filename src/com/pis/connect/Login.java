@@ -6,25 +6,25 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -34,13 +34,28 @@ import android.widget.Toast;
 
 
 public class Login extends Activity {
+	public static Activity fa;
 	String user_name;
 	String user_id;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_login);
+		fa = this;
+		//Veo si ya está logueado
+		SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+		boolean logueado = pref.getBoolean("log_in", false);
+		if (logueado){
+			Intent intent_name = new Intent();
+			intent_name.setClass(getApplicationContext(),Share.class);
+			intent_name.putExtra("name", pref.getString("user_name", ""));
+			intent_name.putExtra("id", pref.getString("user_id", ""));
+			startActivity(intent_name);
+			
+		}
+		else{
+			requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+			setContentView(R.layout.activity_login);
+		}
 	}
 
 	@Override
@@ -136,6 +151,13 @@ public class Login extends Activity {
             super.onPostExecute(result);
             setProgressBarIndeterminateVisibility(false);
 			if (result==200){
+				//Login exitoso
+				//Guardamos el user como logueado
+				SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+				pref.edit().putBoolean("log_in", true).commit();
+				pref.edit().putString("user_name", user_name).commit();
+				pref.edit().putString("user_id", user_id).commit();
+				//Paso a la siguiente activity
 				Intent intent_name = new Intent();
 				intent_name.setClass(getApplicationContext(),Share.class);
 				intent_name.putExtra("name", user_name);
@@ -154,12 +176,10 @@ public class Login extends Activity {
 			}
 			else if (result==401){
 				//PASSWORD INCORRECTO
-				//Borro los campos y pongo el foco en el primero
-				EditText mail = (EditText) findViewById(R.id.editText_mail);
+				//Borro el campo de password y pongo foco en el
 				EditText password = (EditText) findViewById(R.id.editText_password);
-				mail.setText("");
 				password.setText("");
-				mail.requestFocus();
+				password.requestFocus();
 		    	Toast.makeText(getApplicationContext(), R.string.invalid_password, Toast.LENGTH_LONG).show();
 			}
 			else{

@@ -10,6 +10,7 @@
     <string name="password">Password</string>
     <string name="nombre_full">Full name</string>
     <string name="confirmation">Confirmation</string>
+   	<string name="nextbutton">NEXT</string>
     <string name="registerbutton">REGISTER</string>
     <string name="logout">Log out</string>
     <string name="settings">Settings</string>
