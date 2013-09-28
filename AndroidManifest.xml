@@ -30,6 +30,9 @@
          <activity 
         android:name="com.pis.connect.Share">    
         </activity>
+          <activity 
+        android:name="com.pis.connect.RegistroDos">    
+        </activity>
     </application>
 
 </manifest>

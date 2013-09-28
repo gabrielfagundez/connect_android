@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/Button_Facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="conectarFacebook"
+        android:text="@string/conectar_facebook" />
+
+    <Button
+        android:id="@+id/Button_Linkedin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:onClick="conectarLinkedin"
+        android:text="@string/conectar_linkedin" />
+
+    <TextView
+        android:id="@+id/text_Facebook"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/cambiar_por_username" />
+
+    <TextView
+        android:id="@+id/text_Linkedin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/cambiar_por_username" />
+
+</LinearLayout>

@@ -17,7 +17,8 @@
     <string name="invalid_password">Invalid password. Try again :)</string>
     <string name="connection_error">Can\'t connect to server. Try again :)</string>
 	<string name="blank_fields">Fill all the blanks first :)</string>
-    
-
+    <string name="conectar_facebook">Conectar con Facebook</string>
+	<string name="conectar_linkedin">Conectar con LinkedIn</string>
+	<string name="cambiar_por_username">Cambiar este texto por el nombre de usuario despues de conectarse</string>
 
 </resources>

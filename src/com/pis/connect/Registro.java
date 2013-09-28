@@ -35,8 +35,8 @@ public class Registro extends Activity {
 		EditText password2 = (EditText) findViewById(R.id.editText_password2);
 	    String password2_str = password2.getText().toString();
 	    if (password_str.compareTo(password2_str)==0){
-			//Redirijo a la página para Registrarse
-			Intent intent = new Intent(this, Login.class);
+	    	//Redirijo a la siguiente pagina de registro
+			Intent intent = new Intent(this, RegistroDos.class);
 			startActivity(intent);
 	    }
 	    else{
