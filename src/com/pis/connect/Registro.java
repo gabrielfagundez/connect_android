@@ -36,6 +36,11 @@ String user_pass;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
+		if (intent.getBooleanExtra("ocupado", false))
+			Toast.makeText(getApplicationContext(), R.string.user_exists, Toast.LENGTH_LONG).show();
+		if (RegistroDos.fa!=null)
+			RegistroDos.fa.finish();
 		fa=this;
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_registro);

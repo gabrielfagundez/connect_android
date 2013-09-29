@@ -4,41 +4,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/Button_Facebook"
-        android:layout_width="match_parent"
+    <com.facebook.widget.LoginButton
+        android:id="@+id/authButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:onClick="conectarFacebook"
-        android:text="@string/conectar_facebook" />
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp" />
 
     <Button
         android:id="@+id/Button_Linkedin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="20dp"
         android:onClick="conectarLinkedin"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/conectar_linkedin" />
-
-    <TextView
-        android:id="@+id/text_Facebook"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/cambiar_por_username" />
-
-    <TextView
-        android:id="@+id/text_Linkedin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="@string/cambiar_por_username" />
 
     <Button
         android:id="@+id/Button_Registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_margin="50dp"
         android:onClick="registrar"
         android:text="@string/registerbutton" />
 
