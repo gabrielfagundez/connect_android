@@ -34,17 +34,21 @@ import android.widget.Toast;
 
 
 public class Login extends Activity {
-	public static Activity fa;
+	
+	public static Activity fa;//Esto permite matar la activity desde afuera
 	String user_name;
 	String user_id;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		fa = this;
+		
 		//Veo si ya está logueado
 		SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
 		boolean logueado = pref.getBoolean("log_in", false);
 		if (logueado){
+			//Redirijo a la activity con el QR
 			Intent intent_name = new Intent();
 			intent_name.setClass(getApplicationContext(),Share.class);
 			intent_name.putExtra("name", pref.getString("user_name", ""));
@@ -70,11 +74,13 @@ public class Login extends Activity {
 	
 	
 	public void login(View view) {
+		//RUTINA AL APRETAR EL BOTON DE LOGIN
 		//Obtengo usuario y pass
 		EditText mail = (EditText) findViewById(R.id.editText_mail);
 	    String mail_str = mail.getText().toString();
 		EditText password = (EditText) findViewById(R.id.editText_password);
 	    String password_str = password.getText().toString();
+	    
 	    //Si algún campo está vacio, evito la llamada al server
 	    if ((mail_str.compareTo("")==0) || (password_str.compareTo("")==0)){
 	    	Toast.makeText(getApplicationContext(), R.string.blank_fields , Toast.LENGTH_LONG).show();
@@ -88,6 +94,7 @@ public class Login extends Activity {
 		
 	}
 	
+	//RUTINA AL APRETAR EL BOTON DE REGISTRAR UNA NUEVA CUENTA
 	public void register(View view) {
 		//Redirijo a la página para Registrarse
 		Intent intent = new Intent(this, Registro.class);
@@ -95,63 +102,25 @@ public class Login extends Activity {
 	}
 	
 		
-	
-	public int postData(String user, String pass) {
-		
-	    // Create a new HttpClient and Post Header
-	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://connectwp.azurewebsites.net/api/login/");
-	    try {
-	        // Add your data
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	        nameValuePairs.add(new BasicNameValuePair("Email", user));
-	        nameValuePairs.add(new BasicNameValuePair("Password", pass));
-	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-	        // Execute HTTP Post Request
-	        HttpResponse response = httpclient.execute(httppost);
-	        //Obtengo el código de la respuesta http
-	        int response_code = response.getStatusLine().getStatusCode();
-	        //Obtengo el nombre de usuario
-	        if (response_code==200){
-	        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-		        String json = reader.readLine();
-		        JSONTokener tokener = new JSONTokener(json);
-		        try {
-					JSONObject finalResult = new JSONObject(tokener);
-			        user_name=finalResult.get("Name").toString();
-			        user_id=finalResult.get("Id").toString();
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        	
-	        }
-	        
-	        return response_code;
-
-	    } catch (ClientProtocolException e) {
-	        // TODO Auto-generated catch block
-	    	return -1;
-	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
-	    	return -1;
-	    }
-	} 
-	
-
-    private class consumidorPost extends AsyncTask<String[], Void, Long>{
-		protected Long doInBackground(String[]... arg0) {
+	//METODOS LLAMADOS PARA HACER EL LOGIN
+    private class consumidorPost extends AsyncTask<String[], Void, String[]>{
+		protected String[] doInBackground(String[]... arg0) {
 			// TODO Auto-generated method stub
-			return (long) postData(arg0[0][0],arg0[0][1]);
+			WSLogin wslogin= new WSLogin();
+			String[] res= wslogin.llamarServer(arg0[0][0], arg0[0][1]);
+			return res;
 		}
 		
 		@Override
-		protected void onPostExecute(Long result){
+		protected void onPostExecute(String[] result){
             super.onPostExecute(result);
             setProgressBarIndeterminateVisibility(false);
-			if (result==200){
+            int codigo_res = Integer.parseInt(result[0]);
+			if (codigo_res==200){
 				//Login exitoso
+				//Actualizamos las variables globales
+				user_id=result[1];
+				user_name=result[2];
 				//Guardamos el user como logueado
 				SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
 				pref.edit().putBoolean("log_in", true).commit();
@@ -164,7 +133,7 @@ public class Login extends Activity {
 				intent_name.putExtra("id", user_id);
 				startActivity(intent_name);
 			}
-			else if (result==404) {
+			else if (codigo_res==404) {
 				//USUARIO NO ENCONTRADO
 				//Borro los campos y pongo el foco en el primero
 				EditText mail = (EditText) findViewById(R.id.editText_mail);
@@ -174,7 +143,7 @@ public class Login extends Activity {
 				mail.requestFocus();
 		    	Toast.makeText(getApplicationContext(), R.string.user_not_found , Toast.LENGTH_LONG).show();
 			}
-			else if (result==401){
+			else if (codigo_res==401){
 				//PASSWORD INCORRECTO
 				//Borro el campo de password y pongo foco en el
 				EditText password = (EditText) findViewById(R.id.editText_password);
@@ -184,7 +153,6 @@ public class Login extends Activity {
 			}
 			else{
 				//OTRO TIPO DE ERROR
-				//PASSWORD INCORRECTO
 				//Borro los campos y pongo el foco en el primero
 				EditText mail = (EditText) findViewById(R.id.editText_mail);
 				EditText password = (EditText) findViewById(R.id.editText_password);

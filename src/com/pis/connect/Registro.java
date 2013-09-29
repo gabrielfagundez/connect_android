@@ -29,10 +29,11 @@ import android.widget.Toast;
 
 public class Registro extends Activity {
 
-public static Activity fa;
+public static Activity fa;//Esto permite matar la activity desde afuera
 String user_name;
 String user_mail;
 String user_pass;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,13 +67,16 @@ String user_pass;
 	    String password_str = password.getText().toString();
 		EditText password2 = (EditText) findViewById(R.id.editText_password2);
 	    String password2_str = password2.getText().toString();
+	    
 	    //Validacion
+	    //Campos vacios
 	    if ((nombre_str.compareTo("")==0) || (mail_str.compareTo("")==0)
 	    		|| (password_str.compareTo("")==0) || (password2_str.compareTo("")==0)){
 	    	
 	    	Toast.makeText(getApplicationContext(), R.string.blank_fields, Toast.LENGTH_LONG).show();
 	    }
 	    else{
+	    	//Passwords no coinciden
 		    if (password_str.compareTo(password2_str)!=0){
 		    	password.setText("");
 		    	password2.setText("");
@@ -80,6 +84,7 @@ String user_pass;
 		    	Toast.makeText(getApplicationContext(), R.string.passwords_no_coinciden, Toast.LENGTH_LONG).show();
 		    }
 		    else{
+		    	//Campos OK, llamada al server
 		    	//Actualizo las variables globales
 		    	user_name=nombre_str;
 		    	user_mail= mail_str;
@@ -94,46 +99,21 @@ String user_pass;
 
 	}
 	
-	
-	public int postData(String mail) {		
-	    // Create a new HttpClient and Post Header
-	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://connectwp.azurewebsites.net/api/login/");
-	    try {
-	        // Add your data
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	        nameValuePairs.add(new BasicNameValuePair("Email", mail));
-	        nameValuePairs.add(new BasicNameValuePair("Password", ""));
-	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
-	        // Execute HTTP Post Request
-	        HttpResponse response = httpclient.execute(httppost);
-	        //Obtengo el código de la respuesta http
-	        int response_code = response.getStatusLine().getStatusCode();	        
-	        return response_code;
-
-	    } catch (ClientProtocolException e) {
-	        // TODO Auto-generated catch block
-	    	return -1;
-	    } catch (IOException e) {
-	        // TODO Auto-generated catch block
-	    	return -1;
-	    }
-	} 
-	
-	
+	//RUTINAS DE LLAMADA AL SERVER PARA CHEQUEAR USUARIO DISPONIBLE
 	private class consumidorPost extends AsyncTask<String[], Void, Long>{
 		
 		protected Long doInBackground(String[]... arg0) {
 			// TODO Auto-generated method stub
-			return (long) postData(arg0[0][0]);
+			WSLogin wslogin = new WSLogin();
+			String [] res = wslogin.llamarServer(arg0[0][0], "");
+			return (Long.parseLong(res[0]));
 		}
 		
 		@Override
 		protected void onPostExecute(Long result){
 	        super.onPostExecute(result);
 	        setProgressBarIndeterminateVisibility(false);
-	        setProgressBarIndeterminateVisibility(false);
+	        //User disponible
 			if (result==404){
 				Intent intent_name = new Intent();
 				intent_name.setClass(getApplicationContext(),RegistroDos.class);
@@ -142,7 +122,8 @@ String user_pass;
 				intent_name.putExtra("pass", user_pass);
 				startActivity(intent_name);
 			}
-			else{
+			//User ya registrado
+			else {
 		    	user_name="";
 		    	user_mail= "";
 		    	user_pass="";
@@ -155,7 +136,11 @@ String user_pass;
 		    	pass.setText("");
 		    	pass2.setText("");
 		    	nombre.requestFocus();
-		    	Toast.makeText(getApplicationContext(), R.string.user_exists , Toast.LENGTH_LONG).show();
+		    	if (result==401)
+		    		Toast.makeText(getApplicationContext(), R.string.user_exists , Toast.LENGTH_LONG).show();
+		    	else
+		    		Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
+
 			}
 		}
 	}
