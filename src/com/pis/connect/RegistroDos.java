@@ -62,7 +62,6 @@ public class RegistroDos extends FragmentActivity {
 		mail= intent.getStringExtra("mail");
 		pass= intent.getStringExtra("pass");
 		setContentView(R.layout.activity_registro_dos);
-		
 		//Boton de facebook
 		if (savedInstanceState == null) {
 	        // Add the fragment on initial activity setup
