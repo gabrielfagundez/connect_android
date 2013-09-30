@@ -11,7 +11,7 @@
     <string name="password">Password</string>
     <string name="nombre_full">Full name</string>
     <string name="confirmation">Confirmation</string>
-   	<string name="nextbutton">NEXT</string>
+    <string name="nextbutton">NEXT</string>
     <string name="registerbutton">REGISTER</string>
     <string name="logout">Log out</string>
     <string name="settings">Settings</string>
@@ -19,13 +19,14 @@
     <string name="user_not_found">User not found. Create a new account first :)</string>
     <string name="invalid_password">Invalid password. Try again :)</string>
     <string name="connection_error">Can\'t connect to server. Try again :)</string>
-	<string name="blank_fields">Fill all the blanks first :)</string>
+    <string name="blank_fields">Fill all the blanks first :)</string>
     <string name="conectar_facebook">Conectar con Facebook</string>
-	<string name="conectar_linkedin">Conectar con LinkedIn</string>
-	<string name="cambiar_por_username">Cambiar este texto por el nombre de usuario despues de conectarse</string>
-	<string name="passwords_no_coinciden">Passwords don\'t match. Try again :)</string>
-	<string name="user_exists">Mail already registered. Try again! </string>
-	<string name="join_account">Use my Facebook account </string>
-	<string name="join_account_linkedin">Use my LinkedIn account </string>
-	
+    <string name="conectar_linkedin">Conectar con LinkedIn</string>
+    <string name="cambiar_por_username">Cambiar este texto por el nombre de usuario despues de conectarse</string>
+    <string name="passwords_no_coinciden">Passwords don\'t match. Try again :)</string>
+    <string name="user_exists">Mail already registered. Try again! </string>
+    <string name="join_account">Use my Facebook account </string>
+    <string name="join_account_linkedin">Use my LinkedIn account </string>
+    <string name="title_activity_log_linked_in">LogLinkedIn</string>
+
 </resources>

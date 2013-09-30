@@ -1,25 +1,8 @@
 package com.pis.connect;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
-import android.R.string;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -32,13 +15,9 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.facebook.Request;
 import com.facebook.Session;
-import com.facebook.SessionState;
-import com.facebook.UiLifecycleHelper;
 
 public class RegistroDos extends FragmentActivity {
 	private FacebookFragment mainFragment;
@@ -49,6 +28,10 @@ public class RegistroDos extends FragmentActivity {
 	String linkedin_id="";
 	String pass;
 	String user_id;
+	String idLin;
+
+	Button buttonLinkedIn;
+	
 
 	
 	@Override
@@ -58,10 +41,25 @@ public class RegistroDos extends FragmentActivity {
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);		
 		Intent intent = getIntent();
 		//Obtengo los datos de la pantalla anterior de registro
+		idLin = intent.getStringExtra("idLinkedin");
+		if (!(idLin == null))
+			linkedin_id = idLin;
 		name= intent.getStringExtra("name");
 		mail= intent.getStringExtra("mail");
 		pass= intent.getStringExtra("pass");
 		setContentView(R.layout.activity_registro_dos);
+		
+		if (linkedin_id != "")
+			Log.i("ID- AL FIN!!: ", linkedin_id);
+		
+	/*	buttonLinkedIn = (Button) findViewById(R.id.Button_Linkedin);
+		
+		buttonLinkedIn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				conectarLinkedin();
+			}
+		});*/
 		
 		//Boton de facebook
 		if (savedInstanceState == null) {
@@ -97,15 +95,10 @@ public class RegistroDos extends FragmentActivity {
 	
 	
 	public void conectarLinkedin(View view){
-		//Conectar a LinkedIn 
-			//MAGIA
 		
-		//Si conecto
-			//linkedin_id=PONER EL ID ACA
-	
-		//Si no se conecto poner el string vacio y tambien si se desconecta
-			linkedin_id="";
-
+		Intent intent = getIntent();
+		intent.setClass(getApplicationContext(),LogLinkedIn.class);
+		startActivity(intent);
 	}
 	
 	//Al hacer click en registrar
