@@ -46,7 +46,7 @@ public class WSSignUp {
 		
 	    // Create a new HttpClient and Post Header
 	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://connectwp.azurewebsites.net/api/SignUp/");
+	    HttpPost httppost = new HttpPost("http://testpis.azurewebsites.net/api/SignUp/");
 	    try {
 	        // Add your data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);

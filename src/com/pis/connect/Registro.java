@@ -127,20 +127,27 @@ String user_pass;
 		    	user_name="";
 		    	user_mail= "";
 		    	user_pass="";
-		    	EditText nombre = (EditText) findViewById(R.id.editText_nombre);
-		    	EditText mail = (EditText) findViewById(R.id.editText_mail);
-		    	EditText pass = (EditText) findViewById(R.id.editText_password);
-		    	EditText pass2 = (EditText) findViewById(R.id.editText_password2);
-		    	nombre.setText("");
-		    	mail.setText("");
-		    	pass.setText("");
-		    	pass2.setText("");
-		    	nombre.requestFocus();
-		    	if (result==401)
-		    		Toast.makeText(getApplicationContext(), R.string.user_exists , Toast.LENGTH_LONG).show();
-		    	else
-		    		Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
 
+		    	if (result==401){
+		    		Toast.makeText(getApplicationContext(), R.string.user_exists , Toast.LENGTH_LONG).show();
+			    	EditText nombre = (EditText) findViewById(R.id.editText_nombre);
+			    	EditText mail = (EditText) findViewById(R.id.editText_mail);
+			    	EditText pass = (EditText) findViewById(R.id.editText_password);
+			    	EditText pass2 = (EditText) findViewById(R.id.editText_password2);
+			    	nombre.setText("");
+			    	mail.setText("");
+			    	pass.setText("");
+			    	pass2.setText("");
+			    	nombre.requestFocus();
+		    	}
+		    	else{
+		    		Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
+			    	EditText pass = (EditText) findViewById(R.id.editText_password);
+			    	EditText pass2 = (EditText) findViewById(R.id.editText_password2);
+			    	pass.setText("");
+			    	pass2.setText("");
+			    	pass.requestFocus();
+		    	}	
 			}
 		}
 	}

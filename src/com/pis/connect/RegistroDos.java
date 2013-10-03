@@ -40,27 +40,22 @@ public class RegistroDos extends FragmentActivity {
 		fa=this;
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);		
 		Intent intent = getIntent();
-		//Obtengo los datos de la pantalla anterior de registro
 		idLin = intent.getStringExtra("idLinkedin");
-		if (!(idLin == null))
-			linkedin_id = idLin;
+		//Obtengo los datos de la pantalla anterior de registro
 		name= intent.getStringExtra("name");
 		mail= intent.getStringExtra("mail");
 		pass= intent.getStringExtra("pass");
 		setContentView(R.layout.activity_registro_dos);
-	
-		if (linkedin_id != "")
+		Button boton_link = (Button) findViewById(R.id.Button_Linkedin);
+		boton_link.setVisibility(Button.VISIBLE);
+		if (!(idLin == null)) {
+			linkedin_id = idLin;
+			boton_link.setVisibility(Button.INVISIBLE);
+		}
+		if (linkedin_id != ""){
 			Log.i("ID- AL FIN!!: ", linkedin_id);
-		
-	/*	buttonLinkedIn = (Button) findViewById(R.id.Button_Linkedin);
-		
-		buttonLinkedIn.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				conectarLinkedin();
-			}
-		});*/
-		
+			//boton_link.setVisibility(Button.INVISIBLE);
+		}
 
 		//Boton de facebook
 		if (savedInstanceState == null) {
@@ -117,7 +112,7 @@ public class RegistroDos extends FragmentActivity {
 					new web().execute(parametros);
 		}
 		else{
-			String [] parametros={};
+			String [] parametros=null;
 			new web().execute(parametros);
 		}		
 	}
