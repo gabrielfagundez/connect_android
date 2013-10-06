@@ -24,6 +24,14 @@
         android:visibility="invisible"
         android:text="@string/conectar_linkedin" />
 
+    <TextView
+        android:id="@+id/text_link_sync"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/linkedin_detected"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/Button_Registrar"
         android:layout_width="match_parent"

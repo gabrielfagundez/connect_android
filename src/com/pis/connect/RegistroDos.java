@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Session;
@@ -48,13 +50,16 @@ public class RegistroDos extends FragmentActivity {
 		setContentView(R.layout.activity_registro_dos);
 		Button boton_link = (Button) findViewById(R.id.Button_Linkedin);
 		boton_link.setVisibility(Button.VISIBLE);
+		TextView link_sync= (TextView)findViewById(R.id.text_link_sync);
 		if (!(idLin == null)) {
 			linkedin_id = idLin;
 			boton_link.setVisibility(Button.INVISIBLE);
+			link_sync.setVisibility(TextView.VISIBLE);
+			if (LogLinkedIn.fa!=null)
+				LogLinkedIn.fa.finish();
 		}
 		if (linkedin_id != ""){
 			Log.i("ID- AL FIN!!: ", linkedin_id);
-			//boton_link.setVisibility(Button.INVISIBLE);
 		}
 
 		//Boton de facebook
@@ -190,7 +195,7 @@ public class RegistroDos extends FragmentActivity {
 						intent_name.putExtra("id", user_id);
 						startActivity(intent_name);
 					}
-					else {
+					else if (result_code==410){
 						//USUARIO EXISTE
 						//Vuelvo a la pantalla de registro
 						if (Registro.fa!=null)
@@ -199,6 +204,9 @@ public class RegistroDos extends FragmentActivity {
 						intent_name.setClass(getApplicationContext(),Registro.class);
 						intent_name.putExtra("ocupado", true);
 						startActivity(intent_name);
+					}
+					else{
+				    	Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_LONG).show();
 					}
 			
 				}

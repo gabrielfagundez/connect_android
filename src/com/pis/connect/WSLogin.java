@@ -49,7 +49,7 @@ public String[] llamarServer(String user, String pass) {
 
 	    // Create a new HttpClient and Post Header
 	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://servidorpis.azurewebsites.net/api/login/");
+	    HttpPost httppost = new HttpPost("http://testpis.azurewebsites.net/api/login/");
 	    try {
 	        // Add your data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);

@@ -83,17 +83,34 @@ String user_pass;
 		    	password.requestFocus();
 		    	Toast.makeText(getApplicationContext(), R.string.passwords_no_coinciden, Toast.LENGTH_LONG).show();
 		    }
-		    else{
-		    	//Campos OK, llamada al server
-		    	//Actualizo las variables globales
-		    	user_name=nombre_str;
-		    	user_mail= mail_str;
-		    	user_pass=password_str;				    	
-		    	//Verifico si esta disponible el mail
-		    	String [] parametros = {mail_str};
-		    	setProgressBarIndeterminateVisibility(true);
-		    	new consumidorPost().execute(parametros);
-		    		
+		    else {
+		    	if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail_str).matches()){
+		    	password.setText("");
+		    	password2.setText("");
+		    	mail.setText("");
+		    	mail.requestFocus();
+		    	Toast.makeText(getApplicationContext(), R.string.mail_invalido, Toast.LENGTH_LONG).show();
+		    	}
+		    	else 
+		    		if (password_str.length()<6){
+		    			password.setText("");
+				    	password2.setText("");
+				    	password.requestFocus();
+				    	Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_LONG).show();
+
+			    	}
+			    	else{
+				    	//Campos OK, llamada al server
+				    	//Actualizo las variables globales
+				    	user_name=nombre_str;
+				    	user_mail= mail_str;
+				    	user_pass=password_str;				    	
+				    	//Verifico si esta disponible el mail
+				    	String [] parametros = {mail_str};
+				    	setProgressBarIndeterminateVisibility(true);
+				    	new consumidorPost().execute(parametros);
+			    		
+			    	}
 		    }
 	    }
 

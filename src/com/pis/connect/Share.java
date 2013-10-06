@@ -1,7 +1,9 @@
 package com.pis.connect;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,16 +43,26 @@ public class Share extends Activity {
 	    switch (item.getItemId()) {
 	    	//Al apretar el boton de logout
 	        case R.id.action_logout:
-	        	//Actualizo las preferencias
-	        	SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
-				pref.edit().putBoolean("log_in", false).commit();
-				pref.edit().putString("user_name", "").commit();
-				pref.edit().putString("user_id", "").commit();
-	            // go to previous screen when app icon in action bar is clicked
-	            Intent intent = new Intent(this, Login.class);
-	            startActivity(intent);
-	            finish();
-	            return true;
+	        	new AlertDialog.Builder(this)
+	            .setMessage("Are you sure you want to exit?")
+	            .setCancelable(true)
+	            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+	                public void onClick(DialogInterface dialog, int id) {
+	    	        	//Actualizo las preferencias
+	    	        	SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+	    				pref.edit().putBoolean("log_in", false).commit();
+	    				pref.edit().putString("user_name", "").commit();
+	    				pref.edit().putString("user_id", "").commit();
+	    	            // go to previous screen when app icon in action bar is clicked
+	    	            Intent intent = new Intent(getApplicationContext(), Login.class);
+	    	            startActivity(intent);
+	    	            finish();
+	    	            	
+	                }
+	            })
+	            .setNegativeButton("No", null)
+	            .show();
+	        	return true;
 	         //Al apretar el boton de settings
 	    }
 	    return super.onOptionsItemSelected(item);

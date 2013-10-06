@@ -37,12 +37,14 @@ public class LogLinkedIn extends Activity {
 	String linkedin_id="";
 	Button bot;
 	
-	
+	public static Activity fa;//Esto permite matar la activity desde afuera
+
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		fa=this;
 		setContentView(R.layout.activity_log_linked_in);
 		//Show the Up button in the action bar.
 		//setupActionBar();
@@ -111,7 +113,8 @@ public class LogLinkedIn extends Activity {
 					linkedin_id="";
 					e.printStackTrace();
 				}
-				
+				if (RegistroDos.fa!=null)
+					RegistroDos.fa.finish();
 				startActivity(intent);
 				
 			}
