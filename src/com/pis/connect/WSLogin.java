@@ -49,11 +49,11 @@ public String[] llamarServer(String user, String pass) {
 
 	    // Create a new HttpClient and Post Header
 	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://testpis.azurewebsites.net/api/login/");
+	    HttpPost httppost = new HttpPost("http://developmentpis.azurewebsites.net/api/Users/Login/");
 	    try {
 	        // Add your data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-	        nameValuePairs.add(new BasicNameValuePair("Email", user));
+	        nameValuePairs.add(new BasicNameValuePair("Mail", user));
 	        nameValuePairs.add(new BasicNameValuePair("Password", pass));
 	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
@@ -70,7 +70,7 @@ public String[] llamarServer(String user, String pass) {
 					JSONObject finalResult = new JSONObject(tokener);
 			        res_id=finalResult.get("Id").toString();
 			        res_name=finalResult.get("Name").toString();
-			        res_mail=finalResult.get("Email").toString();
+			        res_mail=finalResult.get("Mail").toString();
 			        res_facebookid=finalResult.get("FacebookId").toString();
 			        res_linkedinid=finalResult.get("LinkedInId").toString();
 			        res_password=finalResult.get("Password").toString();  

@@ -30,7 +30,6 @@
     <string name="linkedin_detected">Your linkedin account is synced!</string>
     <string name="title_activity_log_linked_in">LogLinkedIn</string>
     <string name="mail_invalido">Mail not valid. Try again!</string>
-    <string name="password_short">Password must be at least 6 characters</string>
-    <string name="title_activity_show_info_friend">ShowInfoFriend</string>
+     <string name="password_short">Password must be at least 6 characters</string>
 
 </resources>

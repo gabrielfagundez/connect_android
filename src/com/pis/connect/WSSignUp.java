@@ -46,12 +46,12 @@ public class WSSignUp {
 		
 	    // Create a new HttpClient and Post Header
 	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://testpis.azurewebsites.net/api/SignUp/");
+	    HttpPost httppost = new HttpPost("http://developmentpis.azurewebsites.net/api/Users/SignUp/");
 	    try {
 	        // Add your data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 	        nameValuePairs.add(new BasicNameValuePair("Name", name));
-	        nameValuePairs.add(new BasicNameValuePair("Email", email));
+	        nameValuePairs.add(new BasicNameValuePair("Mail", email));
 	        nameValuePairs.add(new BasicNameValuePair("FacebookId", face_id));
 	        nameValuePairs.add(new BasicNameValuePair("LinkedInId", link_id));
 	        nameValuePairs.add(new BasicNameValuePair("Password", pass));
@@ -70,7 +70,7 @@ public class WSSignUp {
 					JSONObject finalResult = new JSONObject(tokener);
 			        res_id=finalResult.get("Id").toString();
 			        res_name=finalResult.get("Name").toString();
-			        res_mail=finalResult.get("Email").toString();
+			        res_mail=finalResult.get("Mail").toString();
 			        res_facebookid=finalResult.get("FacebookId").toString();
 			        res_linkedinid=finalResult.get("LinkedInId").toString();
 			        res_password=finalResult.get("Password").toString();  
