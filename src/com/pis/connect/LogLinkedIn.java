@@ -80,25 +80,23 @@ public class LogLinkedIn extends Activity {
 			    	// Commit the edits!
 			    	editor.commit();
 			    	
-					Log.i("AccessToken", accessToken.getToken());
-					Log.i("PRUEBA", "LLEGA1");
+					Log.i("LogLin-Token", accessToken.getToken());
+					Log.i("LogLin-Secret", accessToken.getTokenSecret());
+
 
 					client = LinkedinDialog.factory.createLinkedInApiClient(accessToken);
-					Log.i("PRUEBA", "LLEGA2");
 
 					Log.i("LinkedinSample","ln_access_token: " + accessToken.getToken());
 					Log.i("LinkedinSample","ln_access_token: " + accessToken.getTokenSecret());
 					
 					Person p = client.getProfileForCurrentUser(EnumSet.of(
-			                ProfileField.ID, ProfileField.FIRST_NAME,
+			                ProfileField.ID, ProfileField.FIRST_NAME, ProfileField.EMAIL_ADDRESS,
 			                ProfileField.LAST_NAME, ProfileField.HEADLINE,
 			                ProfileField.INDUSTRY, ProfileField.PICTURE_URL,
 			                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME,
 			                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY));
-					
-					Log.i("Nombreee: ",p.getFirstName() +" "+ p.getLastName());
-					
-					linkedin_id = p.getId();
+										
+					linkedin_id = p.getEmailAddress();
 					
 					Log.i("linkedin_id: ",linkedin_id);
 					//share.setVisibility(0);

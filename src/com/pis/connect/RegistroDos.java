@@ -26,7 +26,7 @@ public class RegistroDos extends FragmentActivity {
 	public static Activity fa;
 	String name;
 	String mail;
-	String facebook_id;
+	String facebook_id = "";
 	String linkedin_id="";
 	String pass;
 	String user_id;
