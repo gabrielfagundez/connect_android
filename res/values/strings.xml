@@ -34,5 +34,13 @@
     <string name="password_short">Password must be at least 6 characters</string>
     <string name="title_activity_show_info_friend">ShowInfoFriend</string>
     <string name="sync_accounts">Log in to your accounts to sync them with your Connect account</string>
-
+	<string name="add_facebook">Add to Facebook</string>
+	<string name="add_linkedin">Add to LinkedIn</string>
+	<string name="add_phonebook">Add to phonebook</string>
+	<string name="confirm_add1">Add</string>
+	<string name="confirm_add2">to my phonebook?</string>
+	<string name="confirm_logout">Sure you want to logout?</string>
+	<string name="okphonebook">Contact added</string>
+	<string name="errphonebook">Sorry, an error occured.</string>
+	
 </resources>

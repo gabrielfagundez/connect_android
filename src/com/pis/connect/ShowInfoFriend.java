@@ -1,14 +1,24 @@
 package com.pis.connect;
 
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.ContentProviderOperation;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.provider.ContactsContract;
 
 public class ShowInfoFriend extends Activity {
 
@@ -69,6 +79,72 @@ public class ShowInfoFriend extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	
+	public void addphonebook (View view){
+    	new AlertDialog.Builder(this)
+        .setMessage(getResources().getString(R.string.confirm_add1)+" "+ user_name+" " + getResources().getString(R.string.confirm_add2))
+        .setCancelable(true)
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            	boolean ok=agregarcontacto(user_name, user_mail);	 
+            	if (ok)
+    		    	Toast.makeText(getApplicationContext(), R.string.okphonebook , Toast.LENGTH_LONG).show();
+            	else
+    		    	Toast.makeText(getApplicationContext(), R.string.errphonebook , Toast.LENGTH_LONG).show();
+
+            }
+        })
+        .setNegativeButton("No", null)
+        .show();
+	}
+	
+	
+	
+	public boolean agregarcontacto (String name, String mail){
+		 String DisplayName = name;
+		 String emailID = mail;
+
+
+		 ArrayList < ContentProviderOperation > ops = new ArrayList < ContentProviderOperation > ();
+
+		 ops.add(ContentProviderOperation.newInsert(
+		 ContactsContract.RawContacts.CONTENT_URI)
+		     .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+		     .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
+		     .build());
+
+		 //------------------------------------------------------ Names
+		 if (DisplayName != null) {
+		     ops.add(ContentProviderOperation.newInsert(
+		     ContactsContract.Data.CONTENT_URI)
+		         .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+		         .withValue(ContactsContract.Data.MIMETYPE,
+		     ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+		         .withValue(
+		     ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
+		     DisplayName).build());
+		 }
+		 //------------------------------------------------------ Email
+		 if (emailID != null) {
+		     ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+		         .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+		         .withValue(ContactsContract.Data.MIMETYPE,
+		     ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+		         .withValue(ContactsContract.CommonDataKinds.Email.DATA, emailID)
+		         .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+		         .build());
+		 }
+
+		 // Asking the Contact provider to create a new contact                 
+		 try {
+		     getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+		     return true;
+		 } catch (Exception e) {
+		     e.printStackTrace();
+		     return false;
+		 } 
 	}
 
 }
