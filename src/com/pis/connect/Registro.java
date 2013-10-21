@@ -51,9 +51,6 @@ String user_pass;
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		//Escondo los iconos del menú de logout y settings
-		menu.findItem(R.id.action_logout).setVisible(false);
-		menu.findItem(R.id.action_settings).setVisible(false);
 		return true;
 	}
 

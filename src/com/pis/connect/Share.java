@@ -158,35 +158,28 @@ public class Share extends Activity {
 
     }
 
-	//Manejo de los botones de la Action Bar
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	    	//Al apretar el boton de logout
-	        case R.id.action_logout:
-	        	new AlertDialog.Builder(this)
-	            .setMessage("Are you sure you want to exit?")
-	            .setCancelable(true)
-	            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-	                public void onClick(DialogInterface dialog, int id) {
-	    	        	//Actualizo las preferencias
-	    	        	SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
-	    				pref.edit().putBoolean("log_in", false).commit();
-	    				pref.edit().putString("user_name", "").commit();
-	    				pref.edit().putString("user_id", "").commit();
-	    	            // go to previous screen when app icon in action bar is clicked
-	    	            Intent intent = new Intent(getApplicationContext(), Login.class);
-	    	            startActivity(intent);
-	    	            finish();
-	    	            	
-	                }
-	            })
-	            .setNegativeButton("No", null)
-	            .show();
-	        	return true;
-	         //Al apretar el boton de settings
-	    }
-	    return super.onOptionsItemSelected(item);
+
+	public void logout (View view) {
+    	new AlertDialog.Builder(this)
+        .setMessage("Are you sure you want to exit?")
+        .setCancelable(true)
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+	        	//Actualizo las preferencias
+	        	SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+				pref.edit().putBoolean("log_in", false).commit();
+				pref.edit().putString("user_name", "").commit();
+				pref.edit().putString("user_id", "").commit();
+	            // go to previous screen when app icon in action bar is clicked
+	            Intent intent = new Intent(getApplicationContext(), Login.class);
+	            startActivity(intent);
+	            finish();
+	            	
+            }
+        })
+        .setNegativeButton("No", null)
+        .show();
+
 	}
 
 	private static String guessAppropriateEncoding(CharSequence contents) {

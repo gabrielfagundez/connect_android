@@ -49,8 +49,9 @@ public class RegistroDos extends FragmentActivity {
 		pass= intent.getStringExtra("pass");
 		setContentView(R.layout.activity_registro_dos);
 		Button boton_link = (Button) findViewById(R.id.Button_Linkedin);
-		boton_link.setVisibility(Button.VISIBLE);
 		TextView link_sync= (TextView)findViewById(R.id.text_link_sync);
+		boton_link.setVisibility(Button.VISIBLE);
+		link_sync.setVisibility(TextView.INVISIBLE);
 		if (!(idLin == null)) {
 			linkedin_id = idLin;
 			boton_link.setVisibility(Button.INVISIBLE);
@@ -82,9 +83,6 @@ public class RegistroDos extends FragmentActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		//Escondo los iconos del menú de logout y settings
-		menu.findItem(R.id.action_logout).setVisible(false);
-		menu.findItem(R.id.action_settings).setVisible(false);
 		return true;
 	}
 	
