@@ -47,8 +47,8 @@ public class ShowInfoFriend extends Activity {
     	
 	LinkedInApiClient client;
 	
-	Boolean yaAgregue;
-	Boolean agregar;
+	Boolean yaAgregue = false;
+	Boolean agregar = false;
     
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	@SuppressLint("NewApi")
@@ -56,8 +56,6 @@ public class ShowInfoFriend extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_info_friend);
-		// Show the Up button in the action bar.
-		setupActionBar();
 		
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
@@ -80,15 +78,7 @@ public class ShowInfoFriend extends Activity {
 		usrMail.setText(user_mail);
 	}
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
-	}
+	
 	
 	public void addToFacebook(View view) {
 		//Redirijo a la página para Registrarse

@@ -32,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
-        android:text="@string/add_facebook" />
+        android:text="@string/add_facebook"
+        android:onClick="addToFacebook" />
 
     <Button
         android:id="@+id/friendLinkedIn"
@@ -40,7 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:text="@string/add_linkedin" />
+        android:text="@string/add_linkedin"
+        android:onClick="addToLinkedIn" />
 
     <Button
         android:id="@+id/add_phonebook"
