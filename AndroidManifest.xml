@@ -10,12 +10,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/logo_connect"
+        android:icon="@drawable/logoc"
         android:label="@string/app_name"
-        android:theme="@style/ThemeSelector" >
+        android:theme="@android:style/Theme.Light" >
         <activity
             android:name="com.pis.connect.Login"
             android:label="@string/app_name" >
@@ -27,7 +28,8 @@
         </activity>
         <activity android:name="com.pis.connect.Registro" >
         </activity>
-        <activity android:name="com.pis.connect.Share" >
+        <activity android:name="com.pis.connect.Share"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
         </activity>
         <activity android:name="com.pis.connect.RegistroDos" >
         </activity>

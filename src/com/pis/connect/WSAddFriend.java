@@ -1,13 +1,14 @@
 package com.pis.connect;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -26,10 +27,13 @@ public class WSAddFriend {
 		String res_linkedinid="";
 		
 		try {
+			Properties prop = new Properties();
+			prop.load(getClass().getResourceAsStream("server.properties"));
+			String server = prop.getProperty("addfriend");
 			String QrCode = URLEncoder.encode(userId, "UTF-8");
 			
 			HttpClient client = new DefaultHttpClient();
-			String URL = "http://developmentpis.azurewebsites.net/api/Users/GetUser/" + QrCode;
+			String URL = server + QrCode;
 			
 			String SetServerString = "";
 			HttpGet httpget = new HttpGet(URL);

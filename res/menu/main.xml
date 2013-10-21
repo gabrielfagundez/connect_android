@@ -1,13 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
 
-		<item android:id="@+id/action_settings"
-          android:icon="@drawable/settings_icon"
-          android:title="@string/settings"
-          android:showAsAction="ifRoom"/>
-		<item android:id="@+id/action_logout"
-          android:icon="@drawable/logout_icon"
-          android:title="@string/logout"
-          android:showAsAction="ifRoom"/>
-
 </menu>

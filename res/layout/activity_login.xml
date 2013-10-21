@@ -4,13 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@color/blanco"
     android:gravity="center_vertical"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/celeste"
     tools:context=".Login" >
 
     <ImageView
@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
-        android:layout_weight="3"
-        android:src="@drawable/logo_connect"
+        android:layout_weight="1.75"
+        android:src="@drawable/logoc"
         tools:ignore="ContentDescription" />
 
     <EditText
@@ -28,13 +28,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:background="@color/blanco"
         android:ems="10"
         android:hint="@string/mail"
         android:inputType="textEmailAddress"
-        android:textColorHint="@color/grisclarotexto" 
-        android:paddingLeft="10dp">
+        android:paddingLeft="10dp"
+        android:textColorHint="@color/grisclarotexto" >
 
         <requestFocus />
     </EditText>
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
+        android:layout_weight="0.7"
         android:background="@color/blanco"
         android:ems="10"
         android:hint="@string/password"
@@ -54,16 +54,16 @@
         android:textColorHint="@color/grisclarotexto" />
 
     <Button
-        android:id="@+id/button_login"
+        android:id="@+id/Button_Registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
-        android:layout_weight="0.15"
+        android:layout_weight="0.7"
         android:background="@drawable/login_selector"
+        android:onClick="login"
         android:text="@string/login"
-        android:textColor="@color/gristexto" 
-        android:onClick="login"/>
+        android:textColor="@color/blanco" />
 
     <Button
         android:id="@+id/button_register"
@@ -71,9 +71,13 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_weight="0.15"
+        android:background="@drawable/login_selector"
+        android:onClick="register"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/create_new_account"
-        android:textColor="@color/blanco"
-        android:onClick="register" />
+        android:textColor="@color/blanco" />
 
 </LinearLayout>

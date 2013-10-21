@@ -1,10 +1,12 @@
 package com.pis.connect;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -47,10 +49,14 @@ public String[] llamarServer(String user, String pass) {
 		String res_linkedinid="";
 		String res_password="";
 
-	    // Create a new HttpClient and Post Header
-	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://developmentpis.azurewebsites.net/api/Users/Login/");
+
 	    try {
+	    	Properties prop = new Properties();
+			prop.load(getClass().getResourceAsStream("server.properties"));
+			String server = prop.getProperty("login");
+		    // Create a new HttpClient and Post Header
+		    HttpClient httpclient = new DefaultHttpClient();
+		    HttpPost httppost = new HttpPost(server);
 	        // Add your data
 	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 	        nameValuePairs.add(new BasicNameValuePair("Mail", user));

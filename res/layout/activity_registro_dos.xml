@@ -9,26 +9,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="30dp"
+        android:layout_weight="1" />
 
     <Button
         android:id="@+id/Button_Linkedin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="100dp"
         android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:onClick="conectarLinkedin"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:onClick="conectarLinkedin"
-        android:visibility="invisible"
-        android:text="@string/conectar_linkedin" />
+        android:text="@string/conectar_linkedin"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/text_link_sync"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="5"
         android:text="@string/linkedin_detected"
         android:visibility="invisible" />
 
@@ -36,7 +40,10 @@
         android:id="@+id/Button_Registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
         android:onClick="registrar"
         android:text="@string/registerbutton" />
 

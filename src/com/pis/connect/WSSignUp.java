@@ -1,19 +1,18 @@
 package com.pis.connect;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -45,20 +44,38 @@ public class WSSignUp {
 		String res_password="";
 		
 	    // Create a new HttpClient and Post Header
-	    HttpClient httpclient = new DefaultHttpClient();
-	    HttpPost httppost = new HttpPost("http://developmentpis.azurewebsites.net/api/Users/SignUp/");
-	    try {
-	        // Add your data
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
+	   /* Este es el codigo que teniamos antes por cualquier cosa:
+	    * 
+	    	HttpClient httpclient = new DefaultHttpClient();
+	    	HttpPost httppost = new HttpPost("http://developmentpis.azurewebsites.net/api/Users/SignUp/");
+	  		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(5);
 	        nameValuePairs.add(new BasicNameValuePair("Name", name));
 	        nameValuePairs.add(new BasicNameValuePair("Mail", email));
 	        nameValuePairs.add(new BasicNameValuePair("FacebookId", face_id));
 	        nameValuePairs.add(new BasicNameValuePair("LinkedInId", link_id));
 	        nameValuePairs.add(new BasicNameValuePair("Password", pass));
 	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-
 	        // Execute HTTP Post Request
 	        HttpResponse response = httpclient.execute(httppost);
+	    */
+	    try {
+	    	Properties prop = new Properties();
+			prop.load(getClass().getResourceAsStream("server.properties"));
+			String server = prop.getProperty("signup");
+	    	// Build the JSON object to pass parameters
+	    	JSONObject jsonObj = new JSONObject();
+	    	jsonObj.put("Name", name);
+	    	jsonObj.put("Mail", email);
+	    	jsonObj.put("FacebookId", face_id);
+	    	jsonObj.put("LinkedInId", link_id);
+	    	jsonObj.put("Password", pass);
+	    	// Create the POST object and add the parameters
+	    	HttpPost httpPost = new HttpPost(server);
+	    	StringEntity entity = new StringEntity(jsonObj.toString(), HTTP.UTF_8);
+	    	entity.setContentType("application/json");
+	    	httpPost.setEntity(entity);
+	    	HttpClient client = new DefaultHttpClient();
+	    	HttpResponse response = client.execute(httpPost);
 	        //Obtengo el código de la respuesta http
 	        int response_code = response.getStatusLine().getStatusCode();
 	        //Obtengo el nombre de usuario
@@ -93,6 +110,11 @@ public class WSSignUp {
 	        // TODO Auto-generated catch block
 	    	String[] result={"-1"};
 	    	return result;
-	    }
+	    } catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+	    	String[] result={"-1"};
+	    	return result;
+		}
 	} 
 }
