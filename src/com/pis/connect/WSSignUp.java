@@ -1,8 +1,10 @@
 package com.pis.connect;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -57,6 +59,9 @@ public class WSSignUp {
 	        HttpResponse response = httpclient.execute(httppost);
 	    */
 	    try {
+	    	Properties prop = new Properties();
+			prop.load(getClass().getResourceAsStream("server.properties"));
+			String server = prop.getProperty("signup");
 	    	// Build the JSON object to pass parameters
 	    	JSONObject jsonObj = new JSONObject();
 	    	jsonObj.put("Name", name);
@@ -65,7 +70,7 @@ public class WSSignUp {
 	    	jsonObj.put("LinkedInId", link_id);
 	    	jsonObj.put("Password", pass);
 	    	// Create the POST object and add the parameters
-	    	HttpPost httpPost = new HttpPost("http://developmentpis.azurewebsites.net/api/Users/SignUp/");
+	    	HttpPost httpPost = new HttpPost(server);
 	    	StringEntity entity = new StringEntity(jsonObj.toString(), HTTP.UTF_8);
 	    	entity.setContentType("application/json");
 	    	httpPost.setEntity(entity);
