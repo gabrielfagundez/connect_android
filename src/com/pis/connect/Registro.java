@@ -67,8 +67,7 @@ String user_pass;
 	    
 	    //Validacion
 	    //Campos vacios
-	    if ((nombre_str.compareTo("")==0) || (mail_str.compareTo("")==0)
-	    		|| (password_str.compareTo("")==0) || (password2_str.compareTo("")==0)){
+	    if ((nombre_str.compareTo("")==0) || (mail_str.compareTo("")==0) || (password_str.compareTo("")==0) || (password2_str.compareTo("")==0)){
 	    	
 	    	Toast.makeText(getApplicationContext(), R.string.blank_fields, Toast.LENGTH_LONG).show();
 	    }
@@ -82,11 +81,11 @@ String user_pass;
 		    }
 		    else {
 		    	if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail_str).matches()){
-		    	password.setText("");
-		    	password2.setText("");
-		    	mail.setText("");
-		    	mail.requestFocus();
-		    	Toast.makeText(getApplicationContext(), R.string.mail_invalido, Toast.LENGTH_LONG).show();
+			    	password.setText("");
+			    	password2.setText("");
+			    	mail.setText("");
+			    	mail.requestFocus();
+			    	Toast.makeText(getApplicationContext(), R.string.mail_invalido, Toast.LENGTH_LONG).show();
 		    	}
 		    	else 
 		    		if (password_str.length()<6){

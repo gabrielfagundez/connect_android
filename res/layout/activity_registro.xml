@@ -28,16 +28,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="@color/blanco"
+        android:background="@color/grisfondo"
         android:ems="10"
         android:hint="@string/nombre_full"
         android:inputType="textPersonName"
         android:paddingLeft="10dp"
-        android:textColorHint="@color/grisclarotexto">
+        android:textColorHint="@color/grisclarotexto" >
+
         <requestFocus />
    </EditText>
         
-
     <EditText
         android:id="@+id/editText_mail"
         android:layout_width="match_parent"
@@ -45,13 +45,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:background="@color/blanco"
+        android:background="@color/grisfondo"
         android:ems="10"
         android:hint="@string/mail"
         android:inputType="textEmailAddress"
         android:paddingLeft="10dp"
         android:textColorHint="@color/grisclarotexto" >
-
         
     </EditText>
 
@@ -62,7 +61,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:background="@color/blanco"
+        android:background="@color/grisfondo"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
@@ -75,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
-        android:background="@color/blanco"
+        android:background="@color/grisfondo"
         android:ems="10"
         android:hint="@string/confirmation"
         android:inputType="textPassword"
