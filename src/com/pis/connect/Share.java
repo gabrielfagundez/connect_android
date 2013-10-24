@@ -39,6 +39,8 @@ public class Share extends Activity {
     String user_facebookId;
     String user_linkedInId;
     
+    String mailFrom;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -49,7 +51,10 @@ public class Share extends Activity {
 		if (RegistroDos.fa!=null)
 			RegistroDos.fa.finish();
 		Intent intent = getIntent();
-		String name= intent.getStringExtra("name");
+		
+		SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", 0);
+		mailFrom = settings.getString("user_mail","");
+		
 		String id= intent.getStringExtra("id");
 	    String dirFoto = "fotoQR";
 	    Context context = this;
@@ -103,7 +108,7 @@ public class Share extends Activity {
 				String capturedQrValue = data.getStringExtra("SCAN_RESULT");
 
 				//Hago la llamada al server
-		    	String [] parametros = {capturedQrValue};
+		    	String [] parametros = {capturedQrValue, mailFrom};
 		    	setProgressBarIndeterminateVisibility(true);
 		    	new consumidorPost().execute(parametros);
 			} else if (resultCode == RESULT_CANCELED) {
@@ -118,9 +123,9 @@ public class Share extends Activity {
     private class consumidorPost extends AsyncTask<String[], Void, String[]>{
 		protected String[] doInBackground(String[]... arg0) {
 			// TODO Auto-generated method stub
-			WSAddFriend wslogin= new WSAddFriend();
+			WSAddFriend wsAddFriend= new WSAddFriend();
 			Log.i("consPost:", arg0[0][0]);
-			String[] res = wslogin.llamarServer(arg0[0][0]);
+			String[] res = wsAddFriend.llamarServer(arg0[0][0],arg0[0][1]);
 			return res;
 		}
 		
@@ -170,6 +175,7 @@ public class Share extends Activity {
 				pref.edit().putBoolean("log_in", false).commit();
 				pref.edit().putString("user_name", "").commit();
 				pref.edit().putString("user_id", "").commit();
+				pref.edit().putString("user_mail", "").commit();
 	            // go to previous screen when app icon in action bar is clicked
 	            Intent intent = new Intent(getApplicationContext(), Login.class);
 	            startActivity(intent);

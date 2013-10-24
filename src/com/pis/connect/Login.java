@@ -38,6 +38,7 @@ public class Login extends Activity {
 	public static Activity fa;//Esto permite matar la activity desde afuera
 	String user_name;
 	String user_id;
+	String user_mail;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -118,11 +119,14 @@ public class Login extends Activity {
 				//Actualizamos las variables globales
 				user_id=result[1];
 				user_name=result[2];
+				user_mail=result[3];
+				
 				//Guardamos el user como logueado
 				SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
 				pref.edit().putBoolean("log_in", true).commit();
 				pref.edit().putString("user_name", user_name).commit();
 				pref.edit().putString("user_id", user_id).commit();
+				pref.edit().putString("user_mail", user_mail).commit();
 				//Paso a la siguiente activity
 				Intent intent_name = new Intent();
 				intent_name.setClass(getApplicationContext(),Share.class);
