@@ -30,6 +30,7 @@ public class RegistroDos extends FragmentActivity {
 	String linkedin_id="";
 	String pass;
 	String user_id;
+	String user_mail;
 	String idLin;
 
 	Button buttonLinkedIn;
@@ -181,11 +182,13 @@ public class RegistroDos extends FragmentActivity {
 						//Actualizamos variables globales
 						name=result[2];
 						user_id=result[1];
+						user_mail=result[3];
 						//Guardamos el user como logueado
 						SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
 						pref.edit().putBoolean("log_in", true).commit();
 						pref.edit().putString("user_name", name).commit();
 						pref.edit().putString("user_id", user_id).commit();
+						pref.edit().putString("user_mail", user_mail);
 						//Paso a la siguiente activity
 						Intent intent_name = new Intent();
 						intent_name.setClass(getApplicationContext(),Share.class);
