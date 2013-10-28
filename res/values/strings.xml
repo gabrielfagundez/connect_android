@@ -43,4 +43,7 @@
 	<string name="confirm_logout">Sure you want to logout?</string>
 	<string name="okphonebook">Contact added</string>
 	<string name="errphonebook">Sorry, an error occured.</string>
+	<string name="user_not_found_share">User not found.</string>
+	<string name="nofacebook">No facebook account to add</string>
+	<string name="nolinkedin">No linkedin account to add</string>
 </resources>

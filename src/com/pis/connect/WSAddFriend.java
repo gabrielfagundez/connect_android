@@ -25,7 +25,7 @@ public class WSAddFriend {
 		String res_mail="";
 		String res_facebookid="";
 		String res_linkedinid="";
-		
+		String res_id="";
 		try {
 			Properties prop = new Properties();
 			prop.load(getClass().getResourceAsStream("server.properties"));
@@ -54,7 +54,7 @@ public class WSAddFriend {
 			        res_mail = finalResult.get("Mail").toString();
 			        res_facebookid = finalResult.get("FacebookId").toString();
 			        res_linkedinid = finalResult.get("LinkedInId").toString();
-			       
+			        res_id = finalResult.get("Id").toString();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class WSAddFriend {
 	        	
 	        }
 	        res_codigo=Integer.toString(response_code);
-	        String[] result= {res_codigo,res_name, res_mail, res_facebookid, res_linkedinid};
+	        String[] result= {res_codigo,res_name, res_mail, res_facebookid, res_linkedinid, res_id};
 	        return result;
 	        
 		} catch (UnsupportedEncodingException e) {

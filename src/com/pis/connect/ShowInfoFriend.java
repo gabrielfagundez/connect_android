@@ -82,61 +82,71 @@ public class ShowInfoFriend extends Activity {
 	
 	public void addToFacebook(View view) {
 		//Redirijo a la página para Registrarse
-		Intent intent = getIntent();
-		String user_id= intent.getStringExtra("facebookId");
-		String urlFb = "http://www.facebook.com/" + user_id;
-		Uri uri = Uri.parse(urlFb);
-		Intent intentOut = new Intent(Intent.ACTION_VIEW, uri);
-		startActivity(intentOut);
+		if (user_facebookId==null || user_facebookId.compareTo("")==0)
+			Toast.makeText(getApplicationContext(), R.string.nofacebook , Toast.LENGTH_LONG).show();
+		else{
+			Intent intent = getIntent();
+			String user_id= intent.getStringExtra("facebookId");
+			String urlFb = "http://www.facebook.com/" + user_id;
+			Uri uri = Uri.parse(urlFb);
+			Intent intentOut = new Intent(Intent.ACTION_VIEW, uri);
+			startActivity(intentOut);
+		}
+		
 	}
 	
 	public void addToLinkedIn(View view){	
 		if (yaAgregue){
 			Toast.makeText(getApplicationContext(), R.string.linkedInSolicitudEnviada , Toast.LENGTH_LONG).show();
 		}else{
-			ProgressDialog progressDialog = new ProgressDialog(ShowInfoFriend.this);
-			LinkedinDialog d = new LinkedinDialog(ShowInfoFriend.this,progressDialog);
-			d.show();
-	
-			d.setVerifierListener(new OnVerifyListener() {
-				@Override
-				public void onVerify(String verifier) {
-					Intent intent = getIntent();
-					String user_id= intent.getStringExtra("linkedInId");
-	
-					Intent newIntent = new Intent();
-					newIntent.setClass(getApplicationContext(),ShowInfoFriend.class);
-	
-					try {
-						accessToken = LinkedinDialog.oAuthService.getOAuthAccessToken(LinkedinDialog.liToken,verifier);
-						client = LinkedinDialog.factory.createLinkedInApiClient(accessToken);
-		
-						Person p = client.getProfileForCurrentUser(EnumSet.of(
-				                ProfileField.ID, ProfileField.FIRST_NAME, ProfileField.EMAIL_ADDRESS,
-				                ProfileField.LAST_NAME, ProfileField.HEADLINE,
-				                ProfileField.INDUSTRY, ProfileField.PICTURE_URL,
-				                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME,
-				                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY));					
-						
-						client.sendInviteByEmail(user_id, p.getFirstName(), p.getLastName(),"New LinkedIn Connection", "Hello, add me to your connections");
-						
-					} catch (Exception e) {
-						Log.i("LinkedinSample", "error to get verifier");
-						e.printStackTrace();
-					}
-					if (RegistroDos.fa!=null)
-						RegistroDos.fa.finish();
-					intent.putExtra("yaAgregue", true);
-					startActivity(intent);
-					
-				}
-			});
 			
-			progressDialog.setMessage("Loading...");
-			progressDialog.setCancelable(true);
-			progressDialog.show();
+			if (user_linkedInId==null || user_linkedInId.compareTo("")==0)
+				Toast.makeText(getApplicationContext(), R.string.nolinkedin , Toast.LENGTH_LONG).show();
+			else{
+				ProgressDialog progressDialog = new ProgressDialog(ShowInfoFriend.this);
+				LinkedinDialog d = new LinkedinDialog(ShowInfoFriend.this,progressDialog);
+				d.show();
 		
+				d.setVerifierListener(new OnVerifyListener() {
+					@Override
+					public void onVerify(String verifier) {
+						Intent intent = getIntent();
+						String user_id= intent.getStringExtra("linkedInId");
 		
+						Intent newIntent = new Intent();
+						newIntent.setClass(getApplicationContext(),ShowInfoFriend.class);
+		
+						try {
+							accessToken = LinkedinDialog.oAuthService.getOAuthAccessToken(LinkedinDialog.liToken,verifier);
+							client = LinkedinDialog.factory.createLinkedInApiClient(accessToken);
+			
+							Person p = client.getProfileForCurrentUser(EnumSet.of(
+					                ProfileField.ID, ProfileField.FIRST_NAME, ProfileField.EMAIL_ADDRESS,
+					                ProfileField.LAST_NAME, ProfileField.HEADLINE,
+					                ProfileField.INDUSTRY, ProfileField.PICTURE_URL,
+					                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME,
+					                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY));					
+							
+							client.sendInviteByEmail(user_id, p.getFirstName(), p.getLastName(),"New LinkedIn Connection", "Hello, add me to your connections");
+							
+						} catch (Exception e) {
+							Log.i("LinkedinSample", "error to get verifier");
+							e.printStackTrace();
+						}
+						if (RegistroDos.fa!=null)
+							RegistroDos.fa.finish();
+						intent.putExtra("yaAgregue", true);
+						startActivity(intent);
+						
+					}
+				});
+				
+				progressDialog.setMessage("Loading...");
+				progressDialog.setCancelable(true);
+				progressDialog.show();
+			
+			
+			}
 		}
 		
 	}

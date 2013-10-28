@@ -1,17 +1,19 @@
 package com.pis.connect;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpResponse;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,30 +76,33 @@ public class WSSignUp {
 	    	StringEntity entity = new StringEntity(jsonObj.toString(), HTTP.UTF_8);
 	    	entity.setContentType("application/json");
 	    	httpPost.setEntity(entity);
-	    	HttpClient client = new DefaultHttpClient();
-	    	HttpResponse response = client.execute(httpPost);
+	    	
+	    	//Timeout
+	    	HttpParams httpParameters = new BasicHttpParams();
+	    	// Set the timeout in milliseconds until a connection is established.
+	    	int timeoutConnection = 10000;
+	    	HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+	    	// Set the default socket timeout (SO_TIMEOUT) 
+	    	// in milliseconds which is the timeout for waiting for data.
+	    	int timeoutSocket = 10000;
+	    	HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+	    	DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
+	    	BasicHttpResponse response = (BasicHttpResponse)  httpClient.execute(httpPost);
 	        //Obtengo el código de la respuesta http
 	        int response_code = response.getStatusLine().getStatusCode();
 	        //Obtengo el nombre de usuario
 	        if (response_code==200){
-	        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-		        String json = reader.readLine();
-		        JSONTokener tokener = new JSONTokener(json);
-		        try {
+		        	BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			        String json = reader.readLine();
+			        JSONTokener tokener = new JSONTokener(json);
 					JSONObject finalResult = new JSONObject(tokener);
-			        res_id=finalResult.get("Id").toString();
+				    res_id=finalResult.get("Id").toString();
 			        res_name=finalResult.get("Name").toString();
 			        res_mail=finalResult.get("Mail").toString();
 			        res_facebookid=finalResult.get("FacebookId").toString();
 			        res_linkedinid=finalResult.get("LinkedInId").toString();
-			        res_password=finalResult.get("Password").toString();  
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	        	
-	        }
-	        
+	        }        
 	        res_codigo=Integer.toString(response_code);
 	        String[] result= {res_codigo, res_id, res_name, res_mail, res_facebookid, res_linkedinid, res_password};
 	        return result;

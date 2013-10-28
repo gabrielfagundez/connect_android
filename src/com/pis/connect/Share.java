@@ -129,7 +129,9 @@ public class Share extends Activity {
             super.onPostExecute(result);
             setProgressBarIndeterminateVisibility(false);
             int codigo_res = Integer.parseInt(result[0]);
-			if (codigo_res==200){
+            SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+            String my_id= pref.getString("user_id", "");
+			if (codigo_res==200 && my_id.compareTo(result[5])!=0){
 				//Login exitoso
 				//Actualizamos las variables globales
 				user_name=result[1];
@@ -146,13 +148,13 @@ public class Share extends Activity {
 				intent_name.putExtra("linkedInId", user_linkedInId);
 				startActivity(intent_name);
 			}
-			else if (codigo_res==404) {
+			else if (codigo_res==404 || my_id.compareTo("")==0) {
 				//USUARIO NO ENCONTRADO
-		    	Toast.makeText(getApplicationContext(), R.string.user_not_found , Toast.LENGTH_LONG).show();
+		    	Toast.makeText(getApplicationContext(), R.string.user_not_found_share , Toast.LENGTH_LONG).show();
 			}
 			else{
 				//OTRO TIPO DE ERROR				
-		    	Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_LONG).show();
+		    	Toast.makeText(getApplicationContext(), R.string.errphonebook, Toast.LENGTH_LONG).show();
 			}
 		}
 
