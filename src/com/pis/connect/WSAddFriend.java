@@ -28,6 +28,7 @@ public class WSAddFriend {
 		String res_mail="";
 		String res_facebookid="";
 		String res_linkedinid="";
+		String res_id="";
 		
 		try {
 			Properties prop = new Properties();
@@ -83,6 +84,7 @@ public class WSAddFriend {
 							res_mail=finalResultAdd.get("Mail").toString();
 							res_facebookid=finalResultAdd.get("FacebookId").toString();
 							res_linkedinid=finalResultAdd.get("LinkedInId").toString();
+							res_id=finalResultAdd.get("Id").toString();
 							
 				        }catch (JSONException e) {
 							// TODO Auto-generated catch block
@@ -106,7 +108,7 @@ public class WSAddFriend {
 			        
 	        res_codigo=Integer.toString(response_code);
 
-	        String[] result= {res_codigo,res_name, res_mail, res_facebookid, res_linkedinid};
+	        String[] result= {res_codigo,res_name, res_mail, res_facebookid, res_linkedinid, res_id};
 	        return result;
 	        
 		} catch (UnsupportedEncodingException e) {
