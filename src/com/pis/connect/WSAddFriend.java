@@ -96,7 +96,7 @@ public class WSAddFriend {
 			        
 			        res_codigo=Integer.toString(response_code_add);
 
-			        String[] result= {res_codigo,res_name, res_mail, res_facebookid, res_linkedinid};
+			        String[] result= {res_codigo,res_name, res_mail, res_facebookid, res_linkedinid, res_id};
 			        return result;
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
