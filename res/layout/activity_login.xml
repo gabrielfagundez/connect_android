@@ -20,7 +20,7 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_weight="1.75"
-        android:src="@drawable/logoc"
+        android:src="@drawable/logoconnect"
         tools:ignore="ContentDescription" />
 
     <EditText

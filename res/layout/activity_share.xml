@@ -33,7 +33,7 @@
             android:background="@color/celeste"
             android:onClick="logout"
             android:scaleType="fitCenter"
-            android:src="@drawable/logout_icon"
+            android:src="@drawable/logout"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
@@ -50,7 +50,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:onClick="readQr"
-            android:src="@drawable/cam_button"
+            android:src="@drawable/ic_action_camera"
             tools:ignore="ContentDescription" />
 
     </LinearLayout>
