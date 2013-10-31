@@ -125,7 +125,9 @@ public class ShowInfoFriend extends Activity {
 					                ProfileField.LAST_NAME, ProfileField.HEADLINE,
 					                ProfileField.INDUSTRY, ProfileField.PICTURE_URL,
 					                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME,
-					                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY));					
+					                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY));	
+							
+							Log.i("LinAddres",user_id);
 							
 							client.sendInviteByEmail(user_id, p.getFirstName(), p.getLastName(),"New LinkedIn Connection", "Hello, add me to your connections");
 							

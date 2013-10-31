@@ -56,6 +56,13 @@ public class LogLinkedIn extends Activity {
 		
 	}
 	
+	@Override
+	public void onBackPressed(){
+		Intent intent = new Intent();
+		intent.setClass(getApplicationContext(),RegistroDos.class);
+		startActivity(intent);
+	}
+	
 	private void loginLinkedIn(){
 		ProgressDialog progressDialog = new ProgressDialog(LogLinkedIn.this);
 		LinkedinDialog d = new LinkedinDialog(LogLinkedIn.this,progressDialog);
