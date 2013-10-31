@@ -197,7 +197,7 @@ public class RegistroDos extends FragmentActivity {
 						pref.edit().putBoolean("log_in", true).commit();
 						pref.edit().putString("user_name", name).commit();
 						pref.edit().putString("user_id", user_id).commit();
-						pref.edit().putString("user_mail", user_mail);
+						pref.edit().putString("user_mail", user_mail).commit();
 						//Paso a la siguiente activity
 						Intent intent_name = new Intent();
 						intent_name.setClass(getApplicationContext(),Share.class);

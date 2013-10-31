@@ -19,10 +19,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
+        android:background="@drawable/login_selector"
         android:onClick="conectarLinkedin"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/conectar_linkedin"
+        android:textColor="@color/blanco"
         android:visibility="invisible" />
 
     <TextView
@@ -44,7 +46,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_weight="1"
+        android:background="@drawable/login_selector"
         android:onClick="registrar"
-        android:text="@string/registerbutton" />
+        android:text="@string/registerbutton"
+        android:textColor="@color/blanco" />
 
 </LinearLayout>
