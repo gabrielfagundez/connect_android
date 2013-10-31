@@ -30,8 +30,7 @@
         </activity>
         <activity android:name="com.pis.connect.Registro" >
         </activity>
-        <activity android:name="com.pis.connect.Share"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+        <activity android:name="com.pis.connect.Share">
         </activity>
         <activity android:name="com.pis.connect.RegistroDos" >
         </activity>
