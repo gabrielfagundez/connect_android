@@ -59,9 +59,11 @@ public class RegistroDos extends FragmentActivity {
 			linkedin_id = idLin;
 			boton_link.setVisibility(Button.INVISIBLE);
 			link_sync.setVisibility(TextView.VISIBLE);
-			if (LogLinkedIn.fa!=null)
-				LogLinkedIn.fa.finish();
 		}
+		
+		if (LogLinkedIn.fa!=null)
+			LogLinkedIn.fa.finish();
+		
 		if (linkedin_id != ""){
 			Log.i("ID- AL FIN!!: ", linkedin_id);
 		}
