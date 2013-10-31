@@ -7,6 +7,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -103,22 +105,28 @@ public class RegistroDos extends FragmentActivity {
 	
 	//Al hacer click en registrar
 	public void registrar(View view){
-    	setProgressBarIndeterminateVisibility(true);
-		//Primero se busca el username de Facebook asincronamente y luego se continua el registro
-		if ((Session.getActiveSession()==null)){
-			facebook_id="";
-			String [] parametros={"NOFB"};
-			new web().execute(parametros);
-		}
-		else if (Session.getActiveSession().getState().toString().compareTo("OPENED")!=0){
+		ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		 NetworkInfo i = conMgr.getActiveNetworkInfo();
+		  if ((i == null) || (!i.isConnected()) || (!i.isAvailable()))
+		    	Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
+		  else{
+		    	setProgressBarIndeterminateVisibility(true);
+				//Primero se busca el username de Facebook asincronamente y luego se continua el registro
+				if ((Session.getActiveSession()==null)){
 					facebook_id="";
 					String [] parametros={"NOFB"};
 					new web().execute(parametros);
-		}
-		else{
-			String [] parametros=null;
-			new web().execute(parametros);
-		}		
+				}
+				else if (Session.getActiveSession().getState().toString().compareTo("OPENED")!=0){
+							facebook_id="";
+							String [] parametros={"NOFB"};
+							new web().execute(parametros);
+				}
+				else{
+					String [] parametros=null;
+					new web().execute(parametros);
+				}	
+		  }
 	}
 	
 	

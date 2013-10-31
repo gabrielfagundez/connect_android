@@ -170,7 +170,7 @@ public class Share extends Activity {
     	new AlertDialog.Builder(this)
         .setMessage(getResources().getString(R.string.confirm_logout))
         .setCancelable(true)
-        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        .setPositiveButton(getResources().getString(R.string.YES), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 	        	//Actualizo las preferencias
 	        	SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
@@ -185,7 +185,7 @@ public class Share extends Activity {
 	            	
             }
         })
-        .setNegativeButton("No", null)
+        .setNegativeButton(getResources().getString(R.string.NO), null)
         .show();
 
 	}

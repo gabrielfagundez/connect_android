@@ -45,4 +45,8 @@
 	<string name="user_not_found_share">User not found.</string>
 	<string name="nofacebook">No Facebook account to add</string>
 	<string name="nolinkedin">No LinkedIn account to add</string>
+	<string name="YES">Yes</string>
+	<string name="NO">No</string>
+	
+	
 </resources>
