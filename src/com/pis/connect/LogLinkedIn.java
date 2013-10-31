@@ -99,19 +99,15 @@ public class LogLinkedIn extends Activity {
 					Person p = client.getProfileForCurrentUser(EnumSet.of(
 			                ProfileField.ID, ProfileField.FIRST_NAME, ProfileField.EMAIL_ADDRESS,
 			                ProfileField.LAST_NAME, ProfileField.HEADLINE,
-			                ProfileField.INDUSTRY, ProfileField.PICTURE_URL,
-			                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME,
-			                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY));
+			                ProfileField.INDUSTRY, ProfileField.PICTURE_URL, ProfileField.SITE_STANDARD_PROFILE_REQUEST, ProfileField.SITE_STANDARD_PROFILE_REQUEST_URL,
+			                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME, ProfileField.API_STANDARD_PROFILE_REQUEST,
+			                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY, ProfileField.API_STANDARD_PROFILE_REQUEST_URL));
 										
-					linkedin_id = p.getEmailAddress();
+					linkedin_id = p.getSiteStandardProfileRequest().getUrl();
 					
 					Log.i("linkedin_id: ",linkedin_id);
-					//share.setVisibility(0);
-					//et.setVisibility(0);
-
+					
 					intent.putExtra("idLinkedin", linkedin_id);
-					
-					
 					
 				} catch (Exception e) {
 					Log.i("LinkedinSample", "error to get verifier");
