@@ -17,14 +17,18 @@
         android:layout_gravity="center"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="30dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/friendMail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:gravity="center" />
 
     <Button
         android:id="@+id/friendFacebook"
@@ -32,8 +36,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_weight="1"
+        android:background="@drawable/login_selector"
+        android:onClick="addToFacebook"
         android:text="@string/add_facebook"
-        android:onClick="addToFacebook" />
+        android:textColor="@color/blanco" />
 
     <Button
         android:id="@+id/friendLinkedIn"
@@ -41,8 +47,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
+        android:background="@drawable/login_selector"
+        android:onClick="addToLinkedIn"
         android:text="@string/add_linkedin"
-        android:onClick="addToLinkedIn" />
+        android:textColor="@color/blanco" />
 
     <Button
         android:id="@+id/add_phonebook"
@@ -51,7 +59,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_weight="1"
+        android:background="@drawable/login_selector"
         android:onClick="addphonebook"
-        android:text="@string/add_phonebook" />
+        android:text="@string/add_phonebook"
+        android:textColor="@color/blanco" />
 
 </LinearLayout>
