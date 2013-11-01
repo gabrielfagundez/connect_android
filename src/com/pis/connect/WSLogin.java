@@ -15,7 +15,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -63,8 +67,18 @@ public String[] llamarServer(String user, String pass) {
 	        nameValuePairs.add(new BasicNameValuePair("Password", pass));
 	        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-	        // Execute HTTP Post Request
-	        HttpResponse response = httpclient.execute(httppost);
+	      //Timeout
+	    	HttpParams httpParameters = new BasicHttpParams();
+	    	// Set the timeout in milliseconds until a connection is established.
+	    	int timeoutConnection = 10000;
+	    	HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+	    	// Set the default socket timeout (SO_TIMEOUT) 
+	    	// in milliseconds which is the timeout for waiting for data.
+	    	int timeoutSocket = 10000;
+	    	HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+
+	    	DefaultHttpClient httpClient = new DefaultHttpClient(httpParameters);
+	    	BasicHttpResponse response = (BasicHttpResponse)  httpClient.execute(httppost);
 	        //Obtengo el código de la respuesta http
 	        int response_code = response.getStatusLine().getStatusCode();
 	        //Obtengo el nombre de usuario
