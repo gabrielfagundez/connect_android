@@ -52,15 +52,6 @@ public class LogLinkedIn extends Activity {
 		StrictMode.setThreadPolicy(policy);
 		    
 		loginLinkedIn();
-		
-		
-	}
-	
-	@Override
-	public void onBackPressed(){
-		Intent intent = new Intent();
-		intent.setClass(getApplicationContext(),RegistroDos.class);
-		startActivity(intent);
 	}
 	
 	private void loginLinkedIn(){
