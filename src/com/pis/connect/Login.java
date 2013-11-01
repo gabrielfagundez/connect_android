@@ -1,34 +1,15 @@
 package com.pis.connect;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -39,6 +20,7 @@ public class Login extends Activity {
 	String user_name;
 	String user_id;
 	String user_mail;
+	ProgressBar pbar;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +40,6 @@ public class Login extends Activity {
 			
 		}
 		else{
-			requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 			setContentView(R.layout.activity_login);
 		}
 	}
@@ -86,7 +67,8 @@ public class Login extends Activity {
 	    else{
 	    	//Hago la llamada al server
 	    	String [] parametros = {mail_str,password_str};
-	    	setProgressBarIndeterminateVisibility(true);
+	    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
+	    	pbar.setVisibility(view.VISIBLE);
 	    	new consumidorPost().execute(parametros);
 	    }
 		
@@ -112,7 +94,7 @@ public class Login extends Activity {
 		@Override
 		protected void onPostExecute(String[] result){
             super.onPostExecute(result);
-            setProgressBarIndeterminateVisibility(false);
+            pbar.setVisibility(pbar.INVISIBLE);
             int codigo_res = Integer.parseInt(result[0]);
 			if (codigo_res==200){
 				//Login exitoso

@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class Registro extends Activity {
@@ -33,6 +34,7 @@ public static Activity fa;//Esto permite matar la activity desde afuera
 String user_name;
 String user_mail;
 String user_pass;
+ProgressBar pbar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,6 @@ String user_pass;
 		if (RegistroDos.fa!=null)
 			RegistroDos.fa.finish();
 		fa=this;
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_registro);
 	}
 
@@ -103,7 +104,8 @@ String user_pass;
 				    	user_pass=password_str;				    	
 				    	//Verifico si esta disponible el mail
 				    	String [] parametros = {mail_str};
-				    	setProgressBarIndeterminateVisibility(true);
+				    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
+				    	pbar.setVisibility(view.VISIBLE);
 				    	new consumidorPost().execute(parametros);
 			    		
 			    	}
@@ -125,7 +127,7 @@ String user_pass;
 		@Override
 		protected void onPostExecute(Long result){
 	        super.onPostExecute(result);
-	        setProgressBarIndeterminateVisibility(false);
+	        pbar.setVisibility(pbar.INVISIBLE);
 	        //User disponible
 			if (result==404){
 				Intent intent_name = new Intent();

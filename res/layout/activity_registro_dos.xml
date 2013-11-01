@@ -38,6 +38,14 @@
         android:text="@string/linkedin_detected"
         android:visibility="invisible" />
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/Button_Registrar"
         android:layout_width="match_parent"

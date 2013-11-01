@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
@@ -41,11 +42,11 @@ public class Share extends Activity {
     String user_linkedInId;
     
     String mailFrom;
+    ProgressBar pbar;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		if (Login.fa !=null)
 			Login.fa.finish();
 		if (Registro.fa!=null)
@@ -111,7 +112,8 @@ public class Share extends Activity {
 
 				//Hago la llamada al server
 		    	String [] parametros = {capturedQrValue, mailFrom};
-		    	setProgressBarIndeterminateVisibility(true);
+		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
+		    	pbar.setVisibility(pbar.VISIBLE);
 		    	new consumidorPost().execute(parametros);
 			} else if (resultCode == RESULT_CANCELED) {
 			// Handle cancel
@@ -134,7 +136,7 @@ public class Share extends Activity {
 		@Override
 		protected void onPostExecute(String[] result){
             super.onPostExecute(result);
-            setProgressBarIndeterminateVisibility(false);
+	    	pbar.setVisibility(pbar.INVISIBLE);
             int codigo_res = Integer.parseInt(result[0]);
             SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
             String my_id= pref.getString("user_id", "");

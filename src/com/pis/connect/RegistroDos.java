@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class RegistroDos extends FragmentActivity {
 	String user_id;
 	String user_mail;
 	String idLin;
+	ProgressBar pbar;
 
 	Button buttonLinkedIn;
 	
@@ -42,8 +45,7 @@ public class RegistroDos extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		fa=this;
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);		
+		fa=this;		
 		Intent intent = getIntent();
 		idLin = intent.getStringExtra("idLinkedin");
 		//Obtengo los datos de la pantalla anterior de registro
@@ -110,7 +112,8 @@ public class RegistroDos extends FragmentActivity {
 		  if ((i == null) || (!i.isConnected()) || (!i.isAvailable()))
 		    	Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
 		  else{
-		    	setProgressBarIndeterminateVisibility(true);
+		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
+		    	pbar.setVisibility(view.VISIBLE);
 				//Primero se busca el username de Facebook asincronamente y luego se continua el registro
 				if ((Session.getActiveSession()==null)){
 					facebook_id="";
@@ -184,7 +187,7 @@ public class RegistroDos extends FragmentActivity {
 				@Override
 				protected void onPostExecute(String[] result){
 		            super.onPostExecute(result);
-		            setProgressBarIndeterminateVisibility(false);
+		            pbar.setVisibility(pbar.INVISIBLE);
 		            int result_code = Integer.parseInt(result[0]);
 					if (result_code==200){
 						//Registro exitoso

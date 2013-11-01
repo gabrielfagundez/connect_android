@@ -65,13 +65,21 @@
         android:text="@string/login"
         android:textColor="@color/blanco" />
 
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/button_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:layout_weight="0.15"
         android:background="@drawable/login_selector"
         android:onClick="register"
