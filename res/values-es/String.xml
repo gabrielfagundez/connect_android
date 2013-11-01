@@ -45,7 +45,9 @@
 	<string name="user_not_found_share">Usuario no encontrado.</string>
 	<string name="nofacebook">No hay una cuenta de Facebook para agregar.</string>
 	<string name="nolinkedin">No hay una cuenta de LinkedIn para agregar.</string>
-		<string name="YES">Si</string>
+	<string name="YES">Si</string>
 	<string name="NO">No</string>
+	<string name="sign_in_accounts">Inicia sesión en las cuentas que desees añadir a tu perfil de Connect! y luego haz clic en registrar.</string>
+	
 
 </resources>
