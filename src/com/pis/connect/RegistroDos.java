@@ -1,16 +1,23 @@
 package com.pis.connect;
 
 
+import java.util.EnumSet;
+
 import org.json.JSONException;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -24,7 +31,18 @@ import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Session;
+import com.google.code.linkedinapi.client.LinkedInApiClient;
+import com.google.code.linkedinapi.client.LinkedInApiClientFactory;
+import com.google.code.linkedinapi.client.enumeration.ProfileField;
+import com.google.code.linkedinapi.client.oauth.LinkedInAccessToken;
+import com.google.code.linkedinapi.client.oauth.LinkedInOAuthService;
+import com.google.code.linkedinapi.client.oauth.LinkedInRequestToken;
+import com.google.code.linkedinapi.schema.Person;
+import com.pis.connect.LinkedinDialog.OnVerifyListener;
 
+
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+@SuppressLint("NewApi")
 public class RegistroDos extends FragmentActivity {
 	private FacebookFragment mainFragment;
 	public static Activity fa;
@@ -40,31 +58,43 @@ public class RegistroDos extends FragmentActivity {
 
 	Button buttonLinkedIn;
 	
-
+	LinkedInOAuthService oAuthService;
+	LinkedInApiClientFactory factory;
+	LinkedInRequestToken liToken;
 	
+	LinkedInAccessToken accessToken = null;
+	LinkedInApiClient client;
+	
+
+	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+	@SuppressLint("NewApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		fa=this;		
 		Intent intent = getIntent();
-		idLin = intent.getStringExtra("idLinkedin");
+		//idLin = intent.getStringExtra("idLinkedin");
 		//Obtengo los datos de la pantalla anterior de registro
 		name= intent.getStringExtra("name");
 		mail= intent.getStringExtra("mail");
 		pass= intent.getStringExtra("pass");
 		setContentView(R.layout.activity_registro_dos);
+		
+		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		StrictMode.setThreadPolicy(policy);
+		
 		Button boton_link = (Button) findViewById(R.id.Button_Linkedin);
 		TextView link_sync= (TextView)findViewById(R.id.text_link_sync);
 		boton_link.setVisibility(Button.VISIBLE);
 		link_sync.setVisibility(TextView.INVISIBLE);
-		if (!(idLin == null)) {
-			linkedin_id = idLin;
+		if (!(linkedin_id == "")) {
+		//	linkedin_id = idLin;
 			boton_link.setVisibility(Button.INVISIBLE);
 			link_sync.setVisibility(TextView.VISIBLE);
 		}
 		
-		if (LogLinkedIn.fa!=null)
-			LogLinkedIn.fa.finish();
+//		if (LogLinkedIn.fa!=null)
+//			LogLinkedIn.fa.finish();
 		
 		if (linkedin_id != ""){
 			Log.i("ID- AL FIN!!: ", linkedin_id);
@@ -102,9 +132,7 @@ public class RegistroDos extends FragmentActivity {
 	
 	public void conectarLinkedin(View view){
 		
-		Intent intent = getIntent();
-		intent.setClass(getApplicationContext(),LogLinkedIn.class);
-		startActivity(intent);
+		loginLinkedIn();
 	}
 	
 	//Al hacer click en registrar
@@ -228,4 +256,70 @@ public class RegistroDos extends FragmentActivity {
 			}
 	
 	  }
+	  
+	  private void loginLinkedIn(){
+			ProgressDialog progressDialog = new ProgressDialog(RegistroDos.this);
+			LinkedinDialog d = new LinkedinDialog(RegistroDos.this,progressDialog);
+			d.show();
+			
+			d.setVerifierListener(new OnVerifyListener() {
+				@Override
+				public void onVerify(String verifier) {
+					
+					try {
+						Log.i("LinkedinSample", "verifier: " + verifier);
+						accessToken = LinkedinDialog.oAuthService.getOAuthAccessToken(LinkedinDialog.liToken,verifier);
+
+						
+						SharedPreferences settings = getApplicationContext().getSharedPreferences("accessToken", 0);
+				    	SharedPreferences.Editor editor = settings.edit();
+				    	editor.putString("token", accessToken.getToken());
+				    	editor.putString("tokenSecret", accessToken.getTokenSecret());
+				    	
+				    	// Commit the edits!
+				    	editor.commit();
+				    	
+						Log.i("LogLin-Token", accessToken.getToken());
+						Log.i("LogLin-Secret", accessToken.getTokenSecret());
+
+
+						client = LinkedinDialog.factory.createLinkedInApiClient(accessToken);
+
+						Log.i("LinkedinSample","ln_access_token: " + accessToken.getToken());
+						Log.i("LinkedinSample","ln_access_token: " + accessToken.getTokenSecret());
+						
+						Person p = client.getProfileForCurrentUser(EnumSet.of(
+				                ProfileField.ID, ProfileField.FIRST_NAME, ProfileField.EMAIL_ADDRESS,
+				                ProfileField.LAST_NAME, ProfileField.HEADLINE,
+				                ProfileField.INDUSTRY, ProfileField.PICTURE_URL, ProfileField.SITE_STANDARD_PROFILE_REQUEST, ProfileField.SITE_STANDARD_PROFILE_REQUEST_URL,
+				                ProfileField.DATE_OF_BIRTH, ProfileField.LOCATION_NAME, ProfileField.API_STANDARD_PROFILE_REQUEST,
+				                ProfileField.MAIN_ADDRESS, ProfileField.LOCATION_COUNTRY, ProfileField.API_STANDARD_PROFILE_REQUEST_URL));
+											
+						linkedin_id = p.getSiteStandardProfileRequest().getUrl();
+						
+						Log.i("linkedin_id: ",linkedin_id);
+						
+						Button boton_link = (Button) findViewById(R.id.Button_Linkedin);
+						TextView link_sync= (TextView)findViewById(R.id.text_link_sync);
+						
+						boton_link.setVisibility(Button.INVISIBLE);
+						link_sync.setVisibility(TextView.VISIBLE);
+						
+					} catch (Exception e) {
+						Log.i("LinkedinSample", "error to get verifier");
+						linkedin_id="";
+						e.printStackTrace();
+					}
+//					if (RegistroDos.fa!=null)
+//						RegistroDos.fa.finish();
+					
+				}
+			});
+			
+			progressDialog.setMessage("Loading...");
+			progressDialog.setCancelable(true);
+			progressDialog.show();
+			
+			
+		}
 }
