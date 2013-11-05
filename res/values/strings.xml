@@ -48,6 +48,7 @@
 	<string name="YES">Yes</string>
 	<string name="NO">No</string>
 	<string name="sign_in_accounts">Sign in with the accounts you want to add to your Connect! profile and then click the register button.</string>
+	<string name="title_register">Sign up</string>
 	
 	
 </resources>
