@@ -1,29 +1,12 @@
 package com.pis.connect;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -35,6 +18,7 @@ String user_name;
 String user_mail;
 String user_pass;
 ProgressBar pbar;
+Button next;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +30,7 @@ ProgressBar pbar;
 			RegistroDos.fa.finish();
 		fa=this;
 		setContentView(R.layout.activity_registro);
+		next=(Button) findViewById(R.id.Button_Registrar);
 	}
 
 	@Override
@@ -106,6 +91,7 @@ ProgressBar pbar;
 				    	String [] parametros = {mail_str};
 				    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
 				    	pbar.setVisibility(view.VISIBLE);
+				    	next.setClickable(false);
 				    	new consumidorPost().execute(parametros);
 			    		
 			    	}
@@ -128,6 +114,7 @@ ProgressBar pbar;
 		protected void onPostExecute(Long result){
 	        super.onPostExecute(result);
 	        pbar.setVisibility(pbar.INVISIBLE);
+	        next.setClickable(true);
 	        //User disponible
 			if (result==404){
 				Intent intent_name = new Intent();

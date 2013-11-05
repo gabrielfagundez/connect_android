@@ -22,15 +22,14 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.Request;
 import com.facebook.Session;
+import com.facebook.widget.LoginButton;
 import com.google.code.linkedinapi.client.LinkedInApiClient;
 import com.google.code.linkedinapi.client.LinkedInApiClientFactory;
 import com.google.code.linkedinapi.client.enumeration.ProfileField;
@@ -64,6 +63,8 @@ public class RegistroDos extends FragmentActivity {
 	
 	LinkedInAccessToken accessToken = null;
 	LinkedInApiClient client;
+	LoginButton facebutton;
+	Button registrarbutton;
 	
 
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -113,6 +114,8 @@ public class RegistroDos extends FragmentActivity {
 	        mainFragment = (FacebookFragment) getSupportFragmentManager()
 	        .findFragmentById(android.R.id.content);
 	    }
+		registrarbutton= (Button) findViewById(R.id.Button_Registrar);
+		facebutton= (LoginButton) findViewById(R.id.authButton);
 		
 	}
 
@@ -144,6 +147,9 @@ public class RegistroDos extends FragmentActivity {
 		  else{
 		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
 		    	pbar.setVisibility(view.VISIBLE);
+				buttonLinkedIn.setClickable(false);
+				facebutton.setClickable(false);
+				registrarbutton.setClickable(false);
 				//Primero se busca el username de Facebook asincronamente y luego se continua el registro
 				if ((Session.getActiveSession()==null)){
 					facebook_id="";
@@ -251,6 +257,9 @@ public class RegistroDos extends FragmentActivity {
 					else{
 				    	Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_LONG).show();
 					}
+					buttonLinkedIn.setClickable(true);
+					facebutton.setClickable(true);
+					registrarbutton.setClickable(true);
 			
 				}
 			}

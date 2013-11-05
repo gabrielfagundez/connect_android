@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -43,6 +44,8 @@ public class Share extends Activity {
     
     String mailFrom;
     ProgressBar pbar;
+    ImageButton logoutbutton;
+    ImageButton cambutton;
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,8 @@ public class Share extends Activity {
 	    String dirFoto = "fotoQR";
 	    Context context = this;
 	    setContentView(R.layout.activity_share);
+	    logoutbutton=(ImageButton) findViewById(R.id.Button_Linkedin);
+	    cambutton= (ImageButton) findViewById(R.id.imageButton2);
 		try {
 	        // generate a 150x150 QR code
 	        Bitmap bm = encodeAsBitmap(id, BarcodeFormat.QR_CODE, 400, 400);
@@ -114,6 +119,8 @@ public class Share extends Activity {
 		    	String [] parametros = {capturedQrValue, mailFrom};
 		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
 		    	pbar.setVisibility(pbar.VISIBLE);
+		    	logoutbutton.setClickable(false);
+		    	cambutton.setClickable(false);
 		    	new consumidorPost().execute(parametros);
 			} else if (resultCode == RESULT_CANCELED) {
 			// Handle cancel
@@ -165,6 +172,8 @@ public class Share extends Activity {
 				//OTRO TIPO DE ERROR				
 		    	Toast.makeText(getApplicationContext(), R.string.errphonebook, Toast.LENGTH_LONG).show();
 			}
+	    	logoutbutton.setClickable(true);
+	    	cambutton.setClickable(true);
 		}
 
     }

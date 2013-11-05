@@ -8,6 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -21,6 +22,8 @@ public class Login extends Activity {
 	String user_id;
 	String user_mail;
 	ProgressBar pbar;
+	Button login;
+	Button signup;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class Login extends Activity {
 		}
 		else{
 			setContentView(R.layout.activity_login);
+			login=(Button) findViewById(R.id.Button_Registrar);
+			signup=(Button) findViewById(R.id.button_register);
 		}
 	}
 
@@ -69,6 +74,8 @@ public class Login extends Activity {
 	    	String [] parametros = {mail_str,password_str};
 	    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
 	    	pbar.setVisibility(view.VISIBLE);
+	    	login.setClickable(false);
+	    	signup.setClickable(false);
 	    	new consumidorPost().execute(parametros);
 	    }
 		
@@ -94,7 +101,6 @@ public class Login extends Activity {
 		@Override
 		protected void onPostExecute(String[] result){
             super.onPostExecute(result);
-            pbar.setVisibility(pbar.INVISIBLE);
             int codigo_res = Integer.parseInt(result[0]);
 			if (codigo_res==200){
 				//Login exitoso
@@ -109,6 +115,10 @@ public class Login extends Activity {
 				pref.edit().putString("user_name", user_name).commit();
 				pref.edit().putString("user_id", user_id).commit();
 				pref.edit().putString("user_mail", user_mail).commit();
+				//Actualizo UI
+	            pbar.setVisibility(pbar.INVISIBLE);	    
+	            login.setClickable(true);
+		    	signup.setClickable(true);
 				//Paso a la siguiente activity
 				Intent intent_name = new Intent();
 				intent_name.setClass(getApplicationContext(),Share.class);
@@ -145,6 +155,10 @@ public class Login extends Activity {
 		    	Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_LONG).show();
 				
 			}
+            pbar.setVisibility(pbar.INVISIBLE);	    
+            login.setClickable(true);
+	    	signup.setClickable(true);
+
 		}
 
     }
