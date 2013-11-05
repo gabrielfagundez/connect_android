@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -55,7 +56,9 @@ Button next;
 	    //Campos vacios
 	    if ((nombre_str.compareTo("")==0) || (mail_str.compareTo("")==0) || (password_str.compareTo("")==0) || (password2_str.compareTo("")==0)){
 	    	
-	    	Toast.makeText(getApplicationContext(), R.string.blank_fields, Toast.LENGTH_LONG).show();
+	    	Toast toast= Toast.makeText(getApplicationContext(), R.string.blank_fields, Toast.LENGTH_LONG);
+	    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 10);
+	    	toast.show();
 	    }
 	    else{
 	    	//Passwords no coinciden

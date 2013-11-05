@@ -49,6 +49,12 @@
 	<string name="NO">No</string>
 	<string name="sign_in_accounts">Inicia sesión en las cuentas que desees añadir a tu perfil de Connect! y luego haz clic en registrar.</string>
 	<string name="title_register">Registro</string>
+	<string name="title_accounts">Mis cuentas</string>
+	<string name="title_ready">Listo!</string>
+	<string name="new_connection_1">Te has conectado con</string>
+	<string name="new_connection_2">cuyo mail es </string>
+	
+	
 	
 
 </resources>

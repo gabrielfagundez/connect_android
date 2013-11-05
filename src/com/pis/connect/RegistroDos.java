@@ -55,7 +55,7 @@ public class RegistroDos extends FragmentActivity {
 	String idLin;
 	ProgressBar pbar;
 
-	Button buttonLinkedIn;
+	Button boton_link;
 	
 	LinkedInOAuthService oAuthService;
 	LinkedInApiClientFactory factory;
@@ -84,7 +84,7 @@ public class RegistroDos extends FragmentActivity {
 		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 		
-		Button boton_link = (Button) findViewById(R.id.Button_Linkedin);
+		boton_link = (Button) findViewById(R.id.Button_Linkedin);
 		TextView link_sync= (TextView)findViewById(R.id.text_link_sync);
 		boton_link.setVisibility(Button.VISIBLE);
 		link_sync.setVisibility(TextView.INVISIBLE);
@@ -147,7 +147,7 @@ public class RegistroDos extends FragmentActivity {
 		  else{
 		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
 		    	pbar.setVisibility(view.VISIBLE);
-				buttonLinkedIn.setClickable(false);
+				boton_link.setClickable(false);
 				facebutton.setClickable(false);
 				registrarbutton.setClickable(false);
 				//Primero se busca el username de Facebook asincronamente y luego se continua el registro
@@ -257,7 +257,7 @@ public class RegistroDos extends FragmentActivity {
 					else{
 				    	Toast.makeText(getApplicationContext(), R.string.connection_error, Toast.LENGTH_LONG).show();
 					}
-					buttonLinkedIn.setClickable(true);
+					boton_link.setClickable(true);
 					facebutton.setClickable(true);
 					registrarbutton.setClickable(true);
 			

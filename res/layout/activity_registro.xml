@@ -23,7 +23,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/gristexto"
         android:textSize="35sp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:typeface="normal" />
 
     <ImageView
         android:id="@+id/image_logo"

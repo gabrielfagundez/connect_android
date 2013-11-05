@@ -49,6 +49,12 @@
 	<string name="NO">No</string>
 	<string name="sign_in_accounts">Sign in with the accounts you want to add to your Connect! profile and then click the register button.</string>
 	<string name="title_register">Sign up</string>
+	<string name="title_accounts">My accounts</string>
+	<string name="title_ready">Ready!</string>
+		<string name="new_connection_1">You are now connected with </string>
+	<string name="new_connection_2">whose mail is </string>
+	
+	
 	
 	
 </resources>

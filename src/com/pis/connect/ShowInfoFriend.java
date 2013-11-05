@@ -42,11 +42,10 @@ public class ShowInfoFriend extends Activity {
 		user_facebookId= intent.getStringExtra("facebookId");
 		user_linkedInId = intent.getStringExtra("linkedInId");		
 		
-		TextView usrName = (TextView) findViewById(R.id.friendName);
-		TextView usrMail = (TextView) findViewById(R.id.friendMail);
-		
-		usrName.setText(user_name);
-		usrMail.setText(user_mail);
+		TextView mensaje = (TextView) findViewById(R.id.textView2);
+		mensaje.setText(getResources().getString(R.string.new_connection_1)+ " "+ user_name + " " + getResources().getString(R.string.new_connection_2) + " " + user_mail);
+	
+	
 	}
 	
 	public void addToFacebook(View view) {
