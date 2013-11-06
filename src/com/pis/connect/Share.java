@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -71,7 +72,11 @@ public class Share extends Activity {
 	    cambutton= (ImageButton) findViewById(R.id.imageButton2);
 		try {
 	        // generate a 150x150 QR code
-	        Bitmap bm = encodeAsBitmap(id, BarcodeFormat.QR_CODE, 400, 400);
+			Properties prop = new Properties();
+			prop.load(getClass().getResourceAsStream("server.properties"));
+			String server = prop.getProperty("signup");
+			
+	        Bitmap bm = encodeAsBitmap(server+id, BarcodeFormat.QR_CODE, 400, 400);
 	        File file = new File(context.getFilesDir(), dirFoto);
 	        
 	        FileOutputStream fOut = new FileOutputStream(file);
@@ -118,9 +123,9 @@ public class Share extends Activity {
 			if (resultCode == RESULT_OK) {
 				// Handle successful scan
 				String capturedQrValue = data.getStringExtra("SCAN_RESULT");
-
+				String[] res = capturedQrValue.split("id=");
 				//Hago la llamada al server
-		    	String [] parametros = {capturedQrValue, mailFrom};
+		    	String [] parametros = {res[1], mailFrom};
 		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
 		    	pbar.setVisibility(pbar.VISIBLE);
 		    	logoutbutton.setClickable(false);
