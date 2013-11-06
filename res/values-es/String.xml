@@ -5,15 +5,15 @@
     <string name="app_id">168845279974310</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="login">INICIAR SESIÓN</string>
+    <string name="login">Iniciar sesión</string>
     <string name="create_new_account">Crear una nueva cuenta</string>
     <string name="mail">Mail</string>
     <string name="share">Compartir</string>
     <string name="password">Contraseña</string>
     <string name="nombre_full">Nombre completo</string>
     <string name="confirmation">Confirma la contraseña</string>
-    <string name="nextbutton">SIGUIENTE</string>
-    <string name="registerbutton">REGISTRARSE</string>
+    <string name="nextbutton">Siguiente</string>
+    <string name="registerbutton">Registrarse</string>
     <string name="logout">Cerrar sesión</string>
     <string name="settings">Settings</string>
     <string name="codigo_qr">Codigo QR</string>
@@ -53,7 +53,7 @@
 	<string name="title_ready">Listo!</string>
 	<string name="new_connection_1">Te has conectado con</string>
 	<string name="new_connection_2">cuyo mail es </string>
-		<string name="ok">OK </string>
+		<string name="ok">Ok </string>
 	
 	
 	

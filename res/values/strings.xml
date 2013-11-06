@@ -5,15 +5,15 @@
     <string name="app_id">168845279974310</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="login">LOGIN</string>
+    <string name="login">Login</string>
     <string name="create_new_account">Create a new account</string>
     <string name="mail">Mail</string>
     <string name="share">Share</string>
     <string name="password">Password</string>
     <string name="nombre_full">Full name</string>
     <string name="confirmation">Confirm your password</string>
-    <string name="nextbutton">NEXT</string>
-    <string name="registerbutton">REGISTER</string>
+    <string name="nextbutton">Next</string>
+    <string name="registerbutton">Register</string>
     <string name="logout">Log out</string>
     <string name="settings">Settings</string>
     <string name="codigo_qr">Codigo QR</string>
@@ -36,9 +36,9 @@
     <string name="sync_accounts">Log in to your accounts to sync them with your Connect account</string>
 	<string name="add_facebook">Add to Facebook</string>
 	<string name="add_linkedin">Add to LinkedIn</string>
-	<string name="add_phonebook">Add to phonebook</string>
+	<string name="add_phonebook">Add to phone book</string>
 	<string name="confirm_add1">Add</string>
-	<string name="confirm_add2">to my phonebook?</string>
+	<string name="confirm_add2">to my phone book?</string>
 	<string name="confirm_logout">Are you sure you want to logout?</string>
 	<string name="okphonebook">Contact added</string>
 	<string name="errphonebook">Sorry, an error occured.</string>
@@ -53,7 +53,7 @@
 	<string name="title_ready">Ready!</string>
 		<string name="new_connection_1">You are now connected with </string>
 	<string name="new_connection_2">whose mail is </string>
-	<string name="ok">OK </string>
+	<string name="ok">Ok </string>
 	
 	
 	
