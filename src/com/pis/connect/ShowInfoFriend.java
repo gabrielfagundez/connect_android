@@ -42,9 +42,10 @@ public class ShowInfoFriend extends Activity {
 		user_facebookId= intent.getStringExtra("facebookId");
 		user_linkedInId = intent.getStringExtra("linkedInId");		
 		
-		TextView mensaje = (TextView) findViewById(R.id.textView2);
-		mensaje.setText(getResources().getString(R.string.new_connection_1)+ " "+ user_name + " " + getResources().getString(R.string.new_connection_2) + " " + user_mail);
-	
+		TextView user= (TextView) findViewById(R.id.textView3);
+		TextView mail = (TextView) findViewById(R.id.textView5);
+		user.setText(user_name);
+		mail.setText(user_mail);
 	
 	}
 	
@@ -70,6 +71,17 @@ public class ShowInfoFriend extends Activity {
 				startActivity(intentOut);
 			}
 	}
+	
+	@Override
+	public void onBackPressed() {
+		if (Share.fa !=null)
+			Share.fa.finish();
+		Intent intent_name = new Intent();
+		intent_name.setClass(getApplicationContext(),Share.class);
+		intent_name.putExtra("vineparaatras", true);
+		startActivity(intent_name);
+		finish();
+	};
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -93,6 +105,11 @@ public class ShowInfoFriend extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void ok (View view){
+
+		finish();
 	}
 	
 	
@@ -160,5 +177,9 @@ public class ShowInfoFriend extends Activity {
 		     return false;
 		 } 
 	}
+	
+	
+	
+	
 
 }

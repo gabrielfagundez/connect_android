@@ -3,6 +3,7 @@
     android:id="@+id/LinearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="right"
     android:orientation="vertical"
     tools:context=".ShowInfoFriend" >
 
@@ -30,28 +31,64 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:padding="15dp"
+        android:padding="10dp"
         tools:ignore="InefficientWeight" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingBottom="25dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:paddingTop="35dp" >
+            android:layout_weight="0.75" >
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@color/gristexto"
-                android:textSize="30sp"
-                android:textStyle="italic" />
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/new_connection_1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/grisclarotexto" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/new_connection_2"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/grisclarotexto" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_weight="0.2"
+                android:onClick="ok"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_action_accept" />
 
         </LinearLayout>
 
@@ -64,7 +101,7 @@
             <Button
                 android:id="@+id/friendFacebook"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_selector"
@@ -75,7 +112,7 @@
             <Button
                 android:id="@+id/friendLinkedIn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_selector"
@@ -86,13 +123,14 @@
             <Button
                 android:id="@+id/add_phonebook"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:background="@drawable/login_selector"
                 android:onClick="addphonebook"
                 android:text="@string/add_phonebook"
                 android:textColor="@color/blanco" />
+
         </LinearLayout>
 
     </LinearLayout>

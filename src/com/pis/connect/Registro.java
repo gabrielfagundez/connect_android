@@ -57,7 +57,7 @@ Button next;
 	    if ((nombre_str.compareTo("")==0) || (mail_str.compareTo("")==0) || (password_str.compareTo("")==0) || (password2_str.compareTo("")==0)){
 	    	
 	    	Toast toast= Toast.makeText(getApplicationContext(), R.string.blank_fields, Toast.LENGTH_LONG);
-	    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 10);
+	    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
 	    	toast.show();
 	    }
 	    else{
@@ -66,7 +66,9 @@ Button next;
 		    	password.setText("");
 		    	password2.setText("");
 		    	password.requestFocus();
-		    	Toast.makeText(getApplicationContext(), R.string.passwords_no_coinciden, Toast.LENGTH_LONG).show();
+		    	Toast toast = Toast.makeText(getApplicationContext(), R.string.passwords_no_coinciden, Toast.LENGTH_LONG);
+		    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+		    	toast.show();
 		    }
 		    else {
 		    	if (!android.util.Patterns.EMAIL_ADDRESS.matcher(mail_str).matches()){
@@ -74,14 +76,18 @@ Button next;
 			    	password2.setText("");
 			    	mail.setText("");
 			    	mail.requestFocus();
-			    	Toast.makeText(getApplicationContext(), R.string.mail_invalido, Toast.LENGTH_LONG).show();
+			    	Toast toast= Toast.makeText(getApplicationContext(), R.string.mail_invalido, Toast.LENGTH_LONG);
+			    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+			    	toast.show();
 		    	}
 		    	else 
 		    		if (password_str.length()<6){
 		    			password.setText("");
 				    	password2.setText("");
 				    	password.requestFocus();
-				    	Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_LONG).show();
+				    	Toast toast= Toast.makeText(getApplicationContext(), R.string.password_short, Toast.LENGTH_LONG);
+				    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+				    	toast.show();
 
 			    	}
 			    	else{
@@ -134,7 +140,9 @@ Button next;
 		    	user_pass="";
 
 		    	if (result==401){
-		    		Toast.makeText(getApplicationContext(), R.string.user_exists , Toast.LENGTH_LONG).show();
+		    		Toast toast=Toast.makeText(getApplicationContext(), R.string.user_exists , Toast.LENGTH_LONG);
+			    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+			    	toast.show();
 			    	EditText nombre = (EditText) findViewById(R.id.editText_nombre);
 			    	EditText mail = (EditText) findViewById(R.id.editText_mail);
 			    	EditText pass = (EditText) findViewById(R.id.editText_password);
@@ -146,7 +154,9 @@ Button next;
 			    	nombre.requestFocus();
 		    	}
 		    	else{
-		    		Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
+		    		Toast toast=Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG);
+			    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+			    	toast.show();
 			    	EditText pass = (EditText) findViewById(R.id.editText_password);
 			    	EditText pass2 = (EditText) findViewById(R.id.editText_password2);
 			    	pass.setText("");

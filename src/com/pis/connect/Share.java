@@ -35,7 +35,7 @@ public class Share extends Activity {
 
 	private static final int WHITE = 0xFFFFFFFF;
     private static final int BLACK = 0xFF000000;
-    
+    public static Activity fa;//Esto permite matar la activity desde afuera
     String res_codigo;
     String user_name;
     String user_mail;
@@ -49,6 +49,7 @@ public class Share extends Activity {
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		fa=this;
 		super.onCreate(savedInstanceState);
 		if (Login.fa !=null)
 			Login.fa.finish();
@@ -57,11 +58,12 @@ public class Share extends Activity {
 		if (RegistroDos.fa!=null)
 			RegistroDos.fa.finish();
 		Intent intent = getIntent();
+		boolean vineparaatras= intent.getExtras().getBoolean("vineparaatras", false);
 		
 		SharedPreferences settings = getApplicationContext().getSharedPreferences("prefs", 0);
 		mailFrom = settings.getString("user_mail","");
-		
-		String id= intent.getStringExtra("id");
+        SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
+		String id= pref.getString("user_id", "");
 	    String dirFoto = "fotoQR";
 	    Context context = this;
 	    setContentView(R.layout.activity_share);
@@ -91,7 +93,9 @@ public class Share extends Activity {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}
+		if (vineparaatras)
+			readQr ((View)cambutton);
 	}
 
 	@Override
