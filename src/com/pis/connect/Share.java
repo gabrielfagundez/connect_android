@@ -75,7 +75,7 @@ public class Share extends Activity {
 	        // generate a 150x150 QR code
 			Properties prop = new Properties();
 			prop.load(getClass().getResourceAsStream("server.properties"));
-			String server = prop.getProperty("signup");
+			String server = prop.getProperty("webqr");
 			
 	        Bitmap bm = encodeAsBitmap(server+id, BarcodeFormat.QR_CODE, 400, 400);
 	        File file = new File(context.getFilesDir(), dirFoto);
@@ -122,16 +122,32 @@ public class Share extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == 0) {
 			if (resultCode == RESULT_OK) {
+				Properties prop = new Properties();
+				try {
+					prop.load(getClass().getResourceAsStream("server.properties"));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				String server = prop.getProperty("webqr");
 				// Handle successful scan
 				String capturedQrValue = data.getStringExtra("SCAN_RESULT");
 				String[] res = capturedQrValue.split("id=");
-				//Hago la llamada al server
-		    	String [] parametros = {res[1], mailFrom};
-		    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
-		    	pbar.setVisibility(pbar.VISIBLE);
-		    	logoutbutton.setClickable(false);
-		    	cambutton.setClickable(false);
-		    	new consumidorPost().execute(parametros);
+				if (res[0].compareTo(server)==0){
+					//Hago la llamada al server
+			    	String [] parametros = {res[1], mailFrom};
+			    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
+			    	pbar.setVisibility(pbar.VISIBLE);
+			    	logoutbutton.setClickable(false);
+			    	cambutton.setClickable(false);
+			    	new consumidorPost().execute(parametros);
+				}else{
+					//USUARIO NO ENCONTRADO
+			    	Toast toast=Toast.makeText(getApplicationContext(), R.string.user_not_found_share , Toast.LENGTH_LONG);
+			    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+			    	toast.show();
+				}
+					
 			} else if (resultCode == RESULT_CANCELED) {
 			// Handle cancel
 			}
