@@ -17,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -175,11 +176,15 @@ public class Share extends Activity {
 			}
 			else if (codigo_res==404 || my_id.compareTo("")==0) {
 				//USUARIO NO ENCONTRADO
-		    	Toast.makeText(getApplicationContext(), R.string.user_not_found_share , Toast.LENGTH_LONG).show();
+		    	Toast toast=Toast.makeText(getApplicationContext(), R.string.user_not_found_share , Toast.LENGTH_LONG);
+		    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+		    	toast.show();
 			}
 			else{
 				//OTRO TIPO DE ERROR				
-		    	Toast.makeText(getApplicationContext(), R.string.errphonebook, Toast.LENGTH_LONG).show();
+		    	Toast toast=Toast.makeText(getApplicationContext(), R.string.errphonebook, Toast.LENGTH_LONG);
+		    	toast.setGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL, 0, 0);
+		    	toast.show();
 			}
 	    	logoutbutton.setClickable(true);
 	    	cambutton.setClickable(true);
