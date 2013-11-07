@@ -37,7 +37,7 @@
 	<string name="add_facebook">Agregar a Facebook</string>
 	<string name="add_linkedin">Agregar a LinkedIn</string>
 	<string name="add_phonebook">Agregar a la agenda</string>
-	<string name="confirm_add1">Agregar</string>
+	<string name="confirm_add1">Agregar a</string>
 	<string name="confirm_add2">a mi agenda?</string>
 	<string name="confirm_logout">¿Estás seguro que deseas cerrar sesión?</string>
 	<string name="okphonebook">Contacto añadido.</string>
