@@ -13,17 +13,30 @@
         android:background="@color/celeste"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:paddingTop="10dp" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="1"
             android:text="@string/title_ready"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/blanco"
             tools:ignore="HardcodedText,InefficientWeight" />
+
+        <ImageButton
+            android:id="@+id/imageButton1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.2"
+            android:onClick="ok"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_action_accept" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -78,16 +91,6 @@
                     android:layout_gravity="center"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/imageButton1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:layout_weight="0.2"
-                android:onClick="ok"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_action_accept" />
 
         </LinearLayout>
 
