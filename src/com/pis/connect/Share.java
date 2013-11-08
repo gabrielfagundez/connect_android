@@ -133,7 +133,7 @@ public class Share extends Activity {
 				// Handle successful scan
 				String capturedQrValue = data.getStringExtra("SCAN_RESULT");
 				String[] res = capturedQrValue.split("id=");
-				if (res[0].compareTo(server)==0){
+				if (res[0].compareTo(server.split("id=")[0])==0){
 					//Hago la llamada al server
 			    	String [] parametros = {res[1], mailFrom};
 			    	pbar = (ProgressBar) findViewById(R.id.progressBar1);
