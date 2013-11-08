@@ -8,8 +8,10 @@ import org.json.JSONException;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -20,6 +22,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -134,7 +137,7 @@ public class RegistroDos extends FragmentActivity {
 	
 	
 	public void conectarLinkedin(View view){
-		
+		boton_link.setClickable(false);
 		loginLinkedIn();
 	}
 	
@@ -271,11 +274,27 @@ public class RegistroDos extends FragmentActivity {
 			LinkedinDialog d = new LinkedinDialog(RegistroDos.this,progressDialog);
 			d.show();
 			
+			
+			d.setOnKeyListener(new Dialog.OnKeyListener() {
+
+	            @Override
+	            public boolean onKey(DialogInterface arg0, int keyCode,
+	                    KeyEvent event) {
+	                // TODO Auto-generated method stub
+	                if (keyCode == KeyEvent.KEYCODE_BACK) {
+						boton_link.setClickable(true);
+						arg0.dismiss();
+	                }
+	                return true;
+	            }
+	        });
+
 			d.setVerifierListener(new OnVerifyListener() {
 				@Override
 				public void onVerify(String verifier) {
 					
 					try {
+
 						Log.i("LinkedinSample", "verifier: " + verifier);
 						accessToken = LinkedinDialog.oAuthService.getOAuthAccessToken(LinkedinDialog.liToken,verifier);
 
@@ -313,10 +332,14 @@ public class RegistroDos extends FragmentActivity {
 						
 						boton_link.setVisibility(Button.INVISIBLE);
 						link_sync.setVisibility(TextView.VISIBLE);
+						boton_link.setClickable(true);
+
 						
 					} catch (Exception e) {
 						Log.i("LinkedinSample", "error to get verifier");
 						linkedin_id="";
+						boton_link.setClickable(true);
+
 						e.printStackTrace();
 					}
 //					if (RegistroDos.fa!=null)
