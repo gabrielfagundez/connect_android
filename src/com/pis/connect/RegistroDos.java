@@ -285,7 +285,8 @@ public class RegistroDos extends FragmentActivity {
 						boton_link.setClickable(true);
 						arg0.dismiss();
 	                }
-	                return true;
+	                return false;
+
 	            }
 	        });
 
