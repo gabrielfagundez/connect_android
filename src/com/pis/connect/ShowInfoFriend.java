@@ -117,7 +117,7 @@ public class ShowInfoFriend extends Activity {
     	new AlertDialog.Builder(this)
         .setMessage(getResources().getString(R.string.confirm_add1)+" "+ user_name+" " + getResources().getString(R.string.confirm_add2))
         .setCancelable(true)
-        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        .setPositiveButton(getResources().getString(R.string.YES), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
             	boolean ok=agregarcontacto(user_name, user_mail);	 
             	if (ok)
@@ -127,7 +127,7 @@ public class ShowInfoFriend extends Activity {
 
             }
         })
-        .setNegativeButton("No", null)
+        .setNegativeButton(getResources().getString(R.string.NO), null)
         .show();
 	}
 	
