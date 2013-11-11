@@ -137,8 +137,14 @@ public class RegistroDos extends FragmentActivity {
 	
 	
 	public void conectarLinkedin(View view){
-		boton_link.setClickable(false);
-		loginLinkedIn();
+		ConnectivityManager conMgr = (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		 NetworkInfo i = conMgr.getActiveNetworkInfo();
+		  if ((i == null) || (!i.isConnected()) || (!i.isAvailable()))
+		    	Toast.makeText(getApplicationContext(), R.string.connection_error , Toast.LENGTH_LONG).show();
+		  else{
+				boton_link.setClickable(false);
+				loginLinkedIn();
+		  }		
 	}
 	
 	//Al hacer click en registrar
