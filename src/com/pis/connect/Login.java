@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -28,8 +30,20 @@ public class Login extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		fa = this;
+
 		
+		if (Login.fa !=null)
+			Login.fa.finish();
+		if (Registro.fa!=null)
+			Registro.fa.finish();
+		if (RegistroDos.fa!=null)
+			RegistroDos.fa.finish();
+		if (Share.fa!=null)
+			Share.fa.finish();
+		if (ShowInfoFriend.fa!=null)
+			ShowInfoFriend.fa.finish();
+		
+		fa = this;
 		//Veo si ya está logueado
 		SharedPreferences pref = getSharedPreferences("prefs",Context.MODE_PRIVATE);
 		boolean logueado = pref.getBoolean("log_in", false);

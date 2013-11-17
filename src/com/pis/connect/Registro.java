@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -27,11 +28,21 @@ Button next;
 		Intent intent = getIntent();
 		if (intent.getBooleanExtra("ocupado", false))
 			Toast.makeText(getApplicationContext(), R.string.user_exists, Toast.LENGTH_LONG).show();
+		if (Registro.fa!=null)
+			Registro.fa.finish();
 		if (RegistroDos.fa!=null)
 			RegistroDos.fa.finish();
+		if (Share.fa!=null)
+			Share.fa.finish();
+		if (ShowInfoFriend.fa!=null)
+			ShowInfoFriend.fa.finish();
 		fa=this;
 		setContentView(R.layout.activity_registro);
 		next=(Button) findViewById(R.id.Button_Registrar);
+		
+		//Teclado desaparece
+		InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+	    imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 	}
 
 	@Override

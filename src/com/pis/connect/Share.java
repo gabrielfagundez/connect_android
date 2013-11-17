@@ -51,7 +51,7 @@ public class Share extends Activity {
     
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		fa=this;
+
 		super.onCreate(savedInstanceState);
 		if (Login.fa !=null)
 			Login.fa.finish();
@@ -59,6 +59,11 @@ public class Share extends Activity {
 			Registro.fa.finish();
 		if (RegistroDos.fa!=null)
 			RegistroDos.fa.finish();
+		if (Share.fa!=null)
+			Share.fa.finish();
+		if (ShowInfoFriend.fa!=null)
+			ShowInfoFriend.fa.finish();
+		fa=this;
 		Intent intent = getIntent();
 		boolean vineparaatras= intent.getExtras().getBoolean("vineparaatras", false);
 		

@@ -75,6 +75,12 @@ public class RegistroDos extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (RegistroDos.fa!=null)
+			RegistroDos.fa.finish();
+		if (Share.fa!=null)
+			Share.fa.finish();
+		if (ShowInfoFriend.fa!=null)
+			ShowInfoFriend.fa.finish();
 		fa=this;		
 		Intent intent = getIntent();
 		//idLin = intent.getStringExtra("idLinkedin");
